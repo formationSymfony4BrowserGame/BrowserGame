@@ -1,0 +1,33 @@
+services: 
+  db:
+    image: mysql:latest
+    volumes: 
+      - db_data:/var/lib/mysql
+    environment: 
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: symfony
+      MYSQL_USER: dbuser
+      MYSQL_PASSWORD: dbpass
+    restart: always
+  adminer:
+    image: adminer:latest
+    depends_on:
+     - db
+    ports: 
+      - "8080:8080"
+    restart: always
+  php:
+    image: webdevops/php-apache-dev:7.4
+    depends_on:
+     - db
+    ports:
+     - "80:80"
+     - "443:443"
+     - "9000:9000"
+    volumes:
+      - ./app:/app
+    environment:
+      WEB_DOCUMENT_ROOT: /app/public
+    restart: always
+volumes: 
+  db_data: {}
