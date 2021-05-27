@@ -1,0 +1,38 @@
+services: 
+  db:
+    image: mysql:latest
+    volumes: 
+      - db_data:/var/lib/mysql
+    environment: 
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER_NAME}
+      MYSQL_PASSWORD: ${DB_USER_PASSWORD}
+    restart: always
+  adminer:
+    image: adminer:latest
+    depends_on:
+     - db
+    environment:
+      ADMINER_DESIGN: ${ADMINER_DESIGN}
+    ports: 
+      - "${ADMINER_PORT}:8080"
+    restart: always
+  php:
+    image: webdevops/php-apache-dev:7.4
+    depends_on:
+     - db
+    ports:
+     - "${HTTP_PORT}:80"
+     - "${SSL_PORT}:443"
+    volumes:
+      - ./app:/app:cached
+      - var:/app/var
+      - vendor:/app/vendor
+    environment:
+      WEB_DOCUMENT_ROOT: /app/public
+    restart: always
+volumes: 
+  db_data:
+  var:
+  vendor:
