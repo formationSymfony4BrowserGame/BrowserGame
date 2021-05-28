@@ -27,6 +27,7 @@ services:
      - "${SSL_PORT}:443"
     volumes:
       - ./app:/app:cached
+      - .bashrc:/root/.bashrc
       - var:/app/var
       - vendor:/app/vendor
     environment:

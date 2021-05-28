@@ -1,0 +1,18 @@
+# Copy this file as ".bashrc" in the same folder as the docker-compose.yml file.
+# Then you may do any modification to the .bashrc file.
+
+# bash prompt :
+#
+#user┬hostname ─ folder
+#    ╰─ $ 
+
+PS1='\n\u┬\h ─ \W\n    ╰─ \[\e[1m\]\$\[\e[0m\] '
+
+# ls aliases :
+
+alias ls='ls --color=auto'
+alias l='ls -lart'
+
+#symfony aliases :
+
+alias sf="php bin/console"
