@@ -15,8 +15,8 @@ Jeu multijoueur local basé sur les règles du Pickomino.
     `cp .bashrc-sample .bashrc`
 
 4. Dupliquer le fichier /app/.env en /app/.env.local et modifier les accès à la base de données selon les infos entrés dans .env  
-    `$ cd app`  
-    `$ cp .env .env.local`  
+    `$ cd app`
+    `$ cp .env .env.local`
 
     Modifier la ligne :  
     `DATABASE_URL="mysql://dbuser:dbpass@browsergame_db_1:3306/symfony?serverVersion=5.7"`  
