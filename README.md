@@ -1,5 +1,5 @@
-# BrowerGame : Pickomino
-Jeu multijoueur local basé sur les règles du Pickomino.
+# BrowerGame : Pickomino  
+Jeu multijoueur local basé sur les règles du Pickomino.  
 
 ## Installation  
 
@@ -10,13 +10,13 @@ Jeu multijoueur local basé sur les règles du Pickomino.
     `$ cd BrowserGame`  
     `$ docker compose up`  
 
-3. Dans un autre terminal, Dupliquer les fichiers .env-sample et .bashrc-sample en .env et .bashrc puis modifiez les selon vos préférences.
-    `cp .env-sample .env`
-    `cp .bashrc-sample .bashrc`
+3. Dans un autre terminal, Dupliquer les fichiers .env-sample et .bashrc-sample en .env et .bashrc puis modifiez les selon vos préférences.  
+    `cp .env-sample .env`  
+    `cp .bashrc-sample .bashrc`  
 
 4. Dupliquer le fichier /app/.env en /app/.env.local et modifier les accès à la base de données selon les infos entrés dans .env  
-    `$ cd app`
-    `$ cp .env .env.local`
+    `$ cd app`  
+    `$ cp .env .env.local`  
 
     Modifier la ligne :  
     `DATABASE_URL="mysql://dbuser:dbpass@browsergame_db_1:3306/symfony?serverVersion=5.7"`  
