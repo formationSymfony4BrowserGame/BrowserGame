@@ -9,7 +9,7 @@ services:
       MYSQL_USER: ${DB_USER_NAME}
       MYSQL_PASSWORD: ${DB_USER_PASSWORD}
     restart: always
-    command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_general_ci']
+    command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_general_ci']
   adminer:
     image: adminer:latest
     depends_on:
