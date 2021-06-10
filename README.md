@@ -6,7 +6,7 @@ Jeu multijoueurs local basé sur les règles du Pickomino.
 1. Clonez le projet en local :  
     `$ git clone https://github.com/formationSymfony4BrowserGame/BrowserGame.git`  
 
-2. Dans un terminal, dupliquez les fichiers .env-sample et .bashrc-sample en .env et .bashrc puis modifiez les selon vos préférences.  
+2. Dans un terminal, dupliquez les fichiers .env-sample et .bashrc-sample en .env et .bashrc puis modifiez les selon vos préférences. Si vous êtes sous windows assurez-vous que votre éditeur de texte n'ajoute pas de retours chariot aux fins de lignes de ces fichiers. Pour cela vérifiez que votre configuration de fin de ligne soit bien `LF` et non `CRLF`.  
     `cp .env-sample .env`  
     `cp .bashrc-sample .bashrc`  
 
