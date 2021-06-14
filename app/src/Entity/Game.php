@@ -52,7 +52,7 @@ class Game
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="games")
      */
-    private $UserId;
+    private $User;
 
     /**
      * @ORM\OneToMany(targetEntity=Player::class, mappedBy="game")
@@ -141,14 +141,14 @@ class Game
         return $this;
     }
 
-    public function getUserId(): ?User
+    public function getUser(): ?User
     {
-        return $this->UserId;
+        return $this->User;
     }
 
-    public function setUserId(?User $UserId): self
+    public function setUser(?User $User): self
     {
-        $this->UserId = $UserId;
+        $this->User = $User;
 
         return $this;
     }

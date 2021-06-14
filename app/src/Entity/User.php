@@ -120,7 +120,7 @@ class User
     {
         if (!$this->games->contains($game)) {
             $this->games[] = $game;
-            $game->setUserId($this);
+            $game->setUser($this);
         }
 
         return $this;
@@ -130,8 +130,8 @@ class User
     {
         if ($this->games->removeElement($game)) {
             // set the owning side to null (unless already changed)
-            if ($game->getUserId() === $this) {
-                $game->setUserId(null);
+            if ($game->getUser() === $this) {
+                $game->setUser(null);
             }
         }
 
