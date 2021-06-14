@@ -28,9 +28,9 @@
             </div>
             <div class="navbar-menu">
                 <div class="navbar-start is-size-4">
-                    <a href="/" class={% if route_name == "accueil" %}"navbar-item is-tab is-active" {% else %}"navbar-item is-tab" {% endif %}>Accueil</a>
-                    <a href="" class={% if route_name == "regles" %}"navbar-item is-tab is-active" {% else %}"navbar-item is-tab" {% endif %}>Règles</a>
-                    <a href="" class={% if route_name == "jouer" %}"navbar-item is-tab is-active" {% else %}"navbar-item is-tab" {% endif %}>Jouer</a>
+                    <a href="{{ path('accueil') }}" class="navbar-item is-tab {% if route_name == "accueil" %}is-active {% else %} {% endif %}">Accueil</a>
+                    <a href="" class="navbar-item is-tab {% if route_name == "regles" %}is-active {% else %} {% endif %}">Règles</a>
+                    <a href="" class="navbar-item is-tab {% if route_name == "jouer" %}is-active {% else %} {% endif %}">Jouer</a>
                 </div>
                 <div class="navbar-end">
                     <div class="navbar-item">
