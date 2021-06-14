@@ -47,7 +47,8 @@
         "symfony/css-selector": "^4.4",
         "symfony/debug-bundle": "^4.4",
         "symfony/phpunit-bridge": "^5.2",
-        "symfony/var-dumper": "^4.4"
+        "symfony/var-dumper": "^4.4",
+        "symfony/web-server-bundle": "4.4.*"
     },
     "config": {
         "preferred-install": {
