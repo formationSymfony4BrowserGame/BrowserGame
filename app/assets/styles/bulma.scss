@@ -1,13 +1,18 @@
 // here add all modifications to bulma variables
-
+$scheme-main: #dfe6ed;
+$scheme-main-bis: #dfe6ed;
+$primary: #4b5c6b;
+$link: $primary;
 // here add imports from bulma
 
 // base imports
 @import "~bulma/sass/utilities/_all.sass";
 @import "~bulma/sass/base/_all.sass";
+@import "~bulma/sass/helpers/_all.sass";
 
 // elements imports
 @import "~bulma/sass/elements/button.sass";
+@import "~bulma/sass/elements/content.sass";
 
 // components imports
 @import "~bulma/sass/components/navbar.sass";
