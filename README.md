@@ -21,11 +21,11 @@ Jeu multijoueurs local basé sur les règles du Pickomino.
     et remplacez si différent `browsergame_db_1` par le nom de votre conteneur du service db.  
 
 4. Installez les dépendances Js et Sass :  
-    `$ npm install` ou `yarn install`  
+    `$ npm install` ou `$ yarn install`  
 
 5. Compilez les assets Js et Sass : 
-    `npm run dev` ou `yarn encore dev` pour les compiler une fois.  
-    `npm run watch` ou `yarn encore dev --watch` pour les compiler automatiquement à chaque modification des fichiers.  
+    `$ npm run dev` ou `$ yarn encore dev` pour les compiler une fois.  
+    `$ npm run watch` ou `$ yarn encore dev --watch` pour les compiler automatiquement à chaque modification des fichiers.  
 
 6. Montez les conteneurs Docker (MySQL, Adminer, PHP 7.4-apache) :  
     
