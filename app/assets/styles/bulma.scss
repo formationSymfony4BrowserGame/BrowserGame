@@ -1,0 +1,22 @@
+// here add all modifications to bulma variables
+
+// here add imports from bulma
+
+// base imports
+@import "~bulma/sass/utilities/_all.sass";
+@import "~bulma/sass/base/_all.sass";
+
+// elements imports
+@import "~bulma/sass/elements/button.sass";
+
+// components imports
+@import "~bulma/sass/components/navbar.sass";
+@import "~bulma/sass/components/tabs.sass";
+@import "~bulma/sass/components/card.sass";
+
+// form imports
+@import "~bulma/sass/form/_all.sass";
+
+// layout imports
+@import "~bulma/sass/layout/footer.sass";
+@import "~bulma/sass/grid/_all.sass";
