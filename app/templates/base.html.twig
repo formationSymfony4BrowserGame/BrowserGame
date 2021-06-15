@@ -2,54 +2,62 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}Welcome!{% endblock %}</title>
+  <head>
+    <meta charset='UTF-8'>
+    <title>
+      Pickomino{% block title %}{% endblock %}
+    </title>
+    <link rel='apple-touch-icon' sizes='120x120' href='/apple-touch-icon.png'>
+    <link rel='icon' type='image/png' sizes='32x32' href='/favicon-32x32.png'>
+    <link rel='icon' type='image/png' sizes='16x16' href='/favicon-16x16.png'>
+    <link rel='manifest' href='/site.webmanifest'>
+    <link rel='mask-icon' href='/safari-pinned-tab.svg' color='#c03525'>
+    <meta name='msapplication-TileColor' content='#ffffff'>
+    <meta name='theme-color' content='#ffffff'>
     {% block stylesheets %}
-        {{ encore_entry_link_tags('Bulma') }}
-        {{ encore_entry_link_tags('Styles') }}
+      {{ encore_entry_link_tags('Bulma') }}
+      {{ encore_entry_link_tags('Styles') }}
     {% endblock %}
 
     {% block javascripts %}
-        {{ encore_entry_script_tags('app') }}
+      {{ encore_entry_script_tags('app') }}
     {% endblock %}
-</head>
+  </head>
 
-<body class="has-background-white">
+  <body class='has-background-white'>
     <header>
-        <nav class="navbar pb-2 pl-3 pr-0 pt-1">
-            <div class="navbar-brand">
-                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false"
-                    data-target="navbarBasicExample">
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                </a>
+      <nav class='navbar pb-2 pl-3 pr-0 pt-1'>
+        <div class='navbar-brand'>
+          <a role='button' class='navbar-burger' aria-label='menu' aria-expanded='false' data-target='navbarBasicExample'>
+            <span aria-hidden='true'></span>
+            <span aria-hidden='true'></span>
+            <span aria-hidden='true'></span>
+          </a>
+        </div>
+        <div class='navbar-menu'>
+          <div class='navbar-start is-size-4'>
+            <a href="{{ path('accueil') }}" class="navbar-item is-tab {% if route_name == 'accueil' %}is-active {% else %} {% endif %}">Accueil</a>
+            <a href='' class="navbar-item is-tab {% if route_name == 'regles' %}is-active {% else %} {% endif %}">Règles</a>
+            <a href='' class="navbar-item is-tab {% if route_name == 'jouer' %}is-active {% else %} {% endif %}">Jouer</a>
+          </div>
+          <div class='navbar-end'>
+            <div class='navbar-item'>
+              <div class='buttons'>
+                <a href='' class='button is-primary'>S'inscrire</a>
+                <a href='' class='button is-primary'>Se connecter</a>
+              </div>
             </div>
-            <div class="navbar-menu">
-                <div class="navbar-start is-size-4">
-                    <a href="{{ path('accueil') }}" class="navbar-item is-tab {% if route_name == "accueil" %}is-active {% else %} {% endif %}">Accueil</a>
-                    <a href="" class="navbar-item is-tab {% if route_name == "regles" %}is-active {% else %} {% endif %}">Règles</a>
-                    <a href="" class="navbar-item is-tab {% if route_name == "jouer" %}is-active {% else %} {% endif %}">Jouer</a>
-                </div>
-                <div class="navbar-end">
-                    <div class="navbar-item">
-                        <div class="buttons">
-                            <a href="" class="button is-primary">S'inscrire</a>
-                            <a href="" class="button is-primary">Se connecter</a>
-                        </div>
-                    </div>
 
-                </div>
-            </div>
-        </nav>
+          </div>
+        </div>
+      </nav>
     </header>
     {% block body %}{% endblock %}
-    <footer class="footer">
-        <div class="content has-text-centered">
-            <p>Footer</p>
-        </div>
+    <footer class='footer'>
+      <div class='content has-text-centered'>
+        <p>Footer</p>
+      </div>
     </footer>
-</body>
+  </body>
 
 </html>
