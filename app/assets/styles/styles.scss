@@ -2,9 +2,32 @@ html {
     min-height: 100vh;// force the page to at least take the entire viewport height
 }
 
+
+
+#logo {
+    height: inherit;
+    border: 1px solid #4b5c6b;
+    border-radius: 4px;
+    margin-right: .5rem;
+    #svg-icon {
+        // use filters to tranform black in #4b5c6b
+        filter: invert(32%) sepia(13%) saturate(766%) hue-rotate(167deg) brightness(101%) contrast(88%);
+    }
+    &:hover {
+        background: #4b5c6b;
+        color: #dfe6ed;
+        #svg-icon {
+            // use filters to tranform black in #dfe6ed
+            filter: invert(98%) sepia(2%) saturate(2899%) hue-rotate(177deg) brightness(99%) contrast(88%);
+        }
+    }
+
+}
+
 footer {
     // position the footer at the botom of the page at force it to take the full viewport width
     position: absolute;
     bottom: 0;
     width: 100vw;
+    height: 10vh;
 }

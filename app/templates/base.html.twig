@@ -1,7 +1,7 @@
 {# route_name is used later to check if a link is active #}
 {% set route_name = app.request.attributes.get('_route') %}
 <!DOCTYPE html>
-<html>
+<html class='has-background-white'>
 
 <head>
     <meta charset='UTF-8'>
@@ -28,21 +28,25 @@
     {% endblock %}
 </head>
 
-<body class='has-background-white'>
+<body>
     <header>
         {# Navbar #}
         <nav class='navbar pb-2 pl-3 pr-0 pt-1'>
             {# Part of the navbar supposed to have the logo and the burger icon for mobile #}
             <div class='navbar-brand'>
+                <a class="navbar-item" href="{{ path('accueil') }}" id="logo">
+                    <img src="safari-pinned-tab.svg" id="svg-icon">
+                    <p class="m-1 is-size-5">Pickomino</p>
+                </a>
                 {# Burger for mobile or small screens #}
-                <a role='button' class='navbar-burger' aria-label='menu' aria-expanded='false' >
+                <a role='button' class='navbar-burger' aria-label='menu' aria-expanded='false' data-target="navMenu">
                 <span aria-hidden='true'></span>
                 <span aria-hidden='true'></span>
                 <span aria-hidden='true'></span>
                 </a>
             </div>
             {# Main menu #}
-            <div class='navbar-menu'>
+            <div class='navbar-menu' id="navMenu">
                 {# Left part of the main menu #}
                 <div class='navbar-start is-size-4'>
                     {# 
