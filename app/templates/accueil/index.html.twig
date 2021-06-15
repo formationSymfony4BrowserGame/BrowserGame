@@ -3,18 +3,59 @@
 {% block title %} - Accueil{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <main class="container">
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+        {# game presentation #}
+        <section class="section">
+            <p class="is-size-3">Pickomino</p>
+            <div class="columns is-vcentered">
+                <div class="column is-two-thirds">
+                    <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus, quisquam aliquid iste nihil molestias facere obcaecati asperiores sit. 
+                    Nihil distinctio officiis blanditiis ea eius sed ex veniam porro cum amet?
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut doloribus placeat eligendi iure ipsum, aliquid sint, 
+                    itaque sunt totam similique iste consectetur dicta eaque officia nihil molestiae! Incidunt, officia culpa.
+                    </p>
+                </div>
+                
+                {# link to the game's page #}
+                <div class="column is-one-third has-text-centered">
+                    <a href="#" class="button is-danger">Jouer</a>
+                </div>  
+            </div>
+        </section>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/app/src/Controller/AccueilController.php'|file_link(0) }}">src/Controller/AccueilController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/app/templates/accueil/index.html.twig'|file_link(0) }}">templates/accueil/index.html.twig</a></code></li>
-    </ul>
-</div>
+        {# group presentation #}
+        <section class="section">
+            <p class="is-size-3">Equipe du Développement</p>
+            <div class="columns mt-3">
+                <div class="column">
+                    <figure class="image is-3by2 has-text-centered">
+                        <img src="https://bulma.io/images/placeholders/480x320.png" alt="Photo de Bastien">
+                    </figure>
+                    <p class="is-size-5">Bastien</p>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
+                    Ut, ullam perferendis architecto corrupti error enim illo hic facere saepe maiores culpa placeat pariatur tempore voluptates, 
+                    quisquam nulla molestiae libero earum.</p>
+                </div>
+                <div class="column">
+                    <figure class="image is-3by2 has-text-centered">
+                        <img src="https://bulma.io/images/placeholders/480x320.png" alt="Photo de Kévin">
+                    </figure>
+                    <p class="is-size-5">Kévin</p>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
+                    Ut, ullam perferendis architecto corrupti error enim illo hic facere saepe maiores culpa placeat pariatur tempore voluptates, 
+                    quisquam nulla molestiae libero earum.</p>
+                </div>
+                <div class="column">
+                    <figure class="image is-3by2 has-text-centered">
+                        <img src="https://bulma.io/images/placeholders/480x320.png" alt="Photo de Narjes">
+                    </figure>
+                    <p class="is-size-5">Narjes</p>
+                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
+                    Ut, ullam perferendis architecto corrupti error enim illo hic facere saepe maiores culpa placeat pariatur tempore voluptates, 
+                    quisquam nulla molestiae libero earum.</p>
+                </div>
+            </div>
+        </section>
+    </main>
 {% endblock %}
