@@ -1,2 +1,4 @@
 .env
 .bashrc
+vendor/*
+!vendor/.gitkeep
