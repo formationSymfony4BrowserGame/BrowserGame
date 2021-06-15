@@ -1,8 +1,9 @@
 html {
-    min-height: 100vh;
+    min-height: 100vh;// force the page to at least take the entire viewport height
 }
 
 footer {
+    // position the footer at the botom of the page at force it to take the full viewport width
     position: absolute;
     bottom: 0;
     width: 100vw;
