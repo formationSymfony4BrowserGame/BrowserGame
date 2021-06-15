@@ -1,20 +1,81 @@
+{# route_name is used later to check if a link is active #}
+{% set route_name = app.request.attributes.get('_route') %}
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {# Run `composer require symfony/webpack-encore-bundle`
-           and uncomment the following Encore helpers to start using Symfony UX #}
-        {% block stylesheets %}
-            {#{{ encore_entry_link_tags('app') }}#}
-        {% endblock %}
+<html class='has-background-white'>
 
-        {% block javascripts %}
-            {#{{ encore_entry_script_tags('Bulma') }}#}
-            {#{{ encore_entry_script_tags('Styles') }}#}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+<head>
+    <meta charset='UTF-8'>
+    <title>
+        Pickomino{% block title %}{% endblock %}
+    </title>
+    {# Favicons #}
+    <link rel='apple-touch-icon' sizes='120x120' href='/apple-touch-icon.png'>
+    <link rel='icon' type='image/png' sizes='32x32' href='/favicon-32x32.png'>
+    <link rel='icon' type='image/png' sizes='16x16' href='/favicon-16x16.png'>
+    <link rel='manifest' href='/site.webmanifest'>
+    <link rel='mask-icon' href='/safari-pinned-tab.svg' color='#c03525'>
+    <meta name='msapplication-TileColor' content='#ffffff'>
+    <meta name='theme-color' content='#ffffff'>
+
+    {# Stylesheets: assets/styles/Bulma.scss and assets/styles/Style.scss #}
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('Bulma') }}
+        {{ encore_entry_link_tags('Styles') }}
+    {% endblock %}
+    {# Javascript: assets/app.js #}
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+</head>
+
+<body>
+    <header>
+        {# Navbar #}
+        <nav class='navbar pb-2 pl-3 pr-0 pt-1'>
+            {# Part of the navbar supposed to have the logo and the burger icon for mobile #}
+            <div class='navbar-brand'>
+                <a class="navbar-item" href="{{ path('accueil') }}" id="logo">
+                    <img src="safari-pinned-tab.svg" id="svg-icon">
+                    <p class="m-1 is-size-5">Pickomino</p>
+                </a>
+                {# Burger for mobile or small screens #}
+                <a role='button' class='navbar-burger' aria-label='menu' aria-expanded='false' data-target="navMenu">
+                <span aria-hidden='true'></span>
+                <span aria-hidden='true'></span>
+                <span aria-hidden='true'></span>
+                </a>
+            </div>
+            {# Main menu #}
+            <div class='navbar-menu' id="navMenu">
+                {# Left part of the main menu #}
+                <div class='navbar-start is-size-4'>
+                    {# 
+                        Each link is supposed to have a call to path('routeName').
+                        To use active link styles we use a Twig if: if route_name == routeName we add the "is-active" class to the link.
+                    #}
+                    <a href="{{ path('accueil') }}" class="navbar-item is-tab {% if route_name == 'accueil' %}is-active {% else %} {% endif %}">Accueil</a>
+                    <a href='' class="navbar-item is-tab {% if route_name == 'regles' %}is-active {% else %} {% endif %}">Règles</a>
+                    <a href='' class="navbar-item is-tab {% if route_name == 'jouer' %}is-active {% else %} {% endif %}">Jouer</a>
+                </div>
+                {# Right part of the main menu #}
+                <div class='navbar-end'>
+                    <div class='navbar-item'>
+                        <div class='buttons'>
+                            <a href='' class='button is-primary'>S'inscrire</a>
+                            <a href='' class='button is-primary'>Se connecter</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    {% block body %}{% endblock %}
+    {# Footer #}
+    <footer class='footer'>
+        <div class='content has-text-centered'>
+            <p>Footer</p>
+        </div>
+    </footer>
+</body>
+
 </html>
