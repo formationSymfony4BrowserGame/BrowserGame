@@ -1,0 +1,9 @@
+#play-container {
+  // sert à (à peut près) centrer verticalement les bouttons
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  & > * {
+    flex-grow: 1;
+  }
+}
