@@ -13,6 +13,8 @@ $link: $primary; // color links and active navbar-items
 // elements imports
 @import "~bulma/sass/elements/button.sass";
 @import "~bulma/sass/elements/content.sass";
+@import "~bulma/sass/elements/container.sass";
+@import "~bulma/sass/elements/title.sass";
 
 // components imports
 @import "~bulma/sass/components/navbar.sass";
@@ -23,5 +25,7 @@ $link: $primary; // color links and active navbar-items
 @import "~bulma/sass/form/_all.sass";
 
 // layout imports
+@import "~bulma/sass/layout/section.sass";
 @import "~bulma/sass/layout/footer.sass";
 @import "~bulma/sass/grid/_all.sass";
+
