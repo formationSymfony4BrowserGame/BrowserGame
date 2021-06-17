@@ -7,14 +7,20 @@
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %}
 
-    <h1>Inscription</h1>
-    {# Commencer un formulaire #}
-    {{ form_start(registrationForm) }}
-        {# Appel des champs du formulaire #}
-        {{ form_row(registrationForm.mail, {label: 'Email'}) }}
-        {{ form_row(registrationForm.pseudo) }}
-        {{ form_row(registrationForm.plainPassword, {label: 'Mot de passe'}) }}
+    <div class="columns mt-6">
+        <div class="column is-one-third is-offset-4">
+            <div class="field">
+                <center><h1  class="label" style="font-size: 2.5em;">Inscription</h1></center>
+                {# Commencer un formulaire #}
+                {{ form_start(registrationForm) }}
+                    {# Appel des champs du formulaire #}
+                    <label class="label" for="inputMail">{{ form_row(registrationForm.mail, {label: 'Email'}) }}</label>
+                    <label class="label" for="inputMail">{{ form_row(registrationForm.pseudo) }}</label>
+                    <label class="label" for="inputMail">{{ form_row(registrationForm.plainPassword, {label: 'Mot de passe'}) }}</label>
 
-        <button type="submit" class="btn">S'inscrire</button>
-    {{ form_end(registrationForm) }}
+                    <center><button class="button is-primary mt-5" type="submit">S'inscrire</button></center>
+                {{ form_end(registrationForm) }}
+            </div>
+        </div>
+    </div>                
 {% endblock %}
