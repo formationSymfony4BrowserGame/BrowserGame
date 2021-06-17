@@ -35,7 +35,12 @@ class GameController extends AbstractController
      */
     public function newGame(): Response
     {
-        return $this->render('game/new.html.twig');
+        // connected user
+        $user = $this->getuser();
+
+        return $this->render('game/new.html.twig', [
+            'user' => $user,
+        ]);
     }
 
     /**

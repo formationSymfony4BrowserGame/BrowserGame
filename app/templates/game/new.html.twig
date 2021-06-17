@@ -1,23 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} - Nouvelle partie{% endblock %}
+{% block title %}
+  - Nouvelle partie{% endblock %}
 
 {% block body %}
 
-<div class="container has-text-centered" id="play-container">
-    <form action="{{ path('game') }}" method="POST">
-        <div class="field">
-            <label class="label">Nombre de joueurs (2-7)</label>
-            <div class="control">
-                <div class="select">
-                    <select>
-                        {% for i in 2..7 %}
-                            <option value="{{ i }}">{{ i }} Joueurs</option>
-                        {% endfor %}
-                    </select>
-                </div>
-            </div>
+  <div class='container has-text-centered' id='play-container'>
+    <form action="{{ path('game') }}" method='POST'>
+      <div class='field'>
+        <label class='label'>Nombre de joueurs (2-7)</label>
+        <div class='control'>
+          <div class='select'>
+            <select>
+              {% for i in 2..7 %}
+                <option value="{{ i }}">{{ i }} Joueurs</option>
+              {% endfor %}
+            </select>
+          </div>
         </div>
+      </div>
+      <div class='player-names-wrapper'>
+        <div class='field'>
+          <label for='' class='label'>Joueur 1</label>
+          <div class='control'>
+            <input type='text' class='input' disabled value="{{ user.getPseudo() }}">
+          </div>
+        </div>
+      </div>
     </form>
-</div>
+  </div>
 {% endblock %}
