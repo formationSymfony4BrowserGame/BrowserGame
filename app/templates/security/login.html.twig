@@ -6,7 +6,9 @@
     <div class="container">
         <form method="post">
             {% if error %}
-                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                <div class="notification is-danger">
+                    {{ error.messageKey|trans(error.messageData, 'security') }}
+                </div>
             {% endif %}
 
             <div class="columns mt-6">

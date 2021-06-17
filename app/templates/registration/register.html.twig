@@ -7,14 +7,14 @@
         <div class="alert alert-danger" role="alert">{{ flashError }}</div>
     {% endfor %}
 
-    <h1>Register</h1>
+    <h1>Inscription</h1>
     {# Commencer un formulaire #}
     {{ form_start(registrationForm) }}
         {# Appel des champs du formulaire #}
         {{ form_row(registrationForm.mail) }}
         {{ form_row(registrationForm.pseudo) }}
-        {{ form_row(registrationForm.plainPassword, {label: 'Password'}) }}
+        {{ form_row(registrationForm.plainPassword, {label: 'Mot de passe'}) }}
 
-        <button type="submit" class="btn">Register</button>
+        <button type="submit" class="btn">S'inscrire</button>
     {{ form_end(registrationForm) }}
 {% endblock %}
