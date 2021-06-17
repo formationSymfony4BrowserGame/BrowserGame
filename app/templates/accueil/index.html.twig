@@ -19,7 +19,10 @@
 
                 {# link to the game's page #}
                 <div class="column is-one-third has-text-centered">
-                    <a href="#" class="button is-danger is-uppercase">Jouer</a>
+                    <a href="{{ path('play') }}" class="button is-danger is-uppercase">Jouer</a>
+                    {% if message is defined %}
+                    <a href="{{ path('app_login') }}">{{message}}</a>
+                    {% endif %}
                 </div>  
             </div>
         </section>

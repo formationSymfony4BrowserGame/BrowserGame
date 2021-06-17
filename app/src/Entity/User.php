@@ -49,7 +49,7 @@ class User implements UserInterface
     private $role = [];
 
     /**
-     * @ORM\OneToMany(targetEntity=Game::class, mappedBy="UserId")
+     * @ORM\OneToMany(targetEntity=Game::class, mappedBy="User")
      */
     private $games;
 
