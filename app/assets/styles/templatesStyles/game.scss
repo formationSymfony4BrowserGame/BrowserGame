@@ -6,4 +6,12 @@
   & > * {
     flex-grow: 1;
   }
+
+  form {
+    * {
+      width: max-content;
+      flex-grow: 0;
+    }
+  }
 }
+

@@ -5,9 +5,11 @@
 
 {% block body %}
 
-  <div class='container has-text-centered' id='play-container'>
+  <div class='container' id='play-container'>
     <form action="{{ path('game') }}" method='POST'>
-      <div class='field'>
+
+      <div class='field is-horizontal is-centered'>
+
         <label class='label'>Nombre de joueurs (2-7)</label>
         <div class='control'>
           <div class='select'>
@@ -20,13 +22,16 @@
         </div>
       </div>
       <div class='player-names-wrapper'>
-        <div class='field'>
+        <div class='field is-horizontal is-centered'>
+
           <label for='' class='label'>Joueur 1</label>
           <div class='control'>
-            <input type='text' class='input' disabled value="{{ user.getPseudo() }}">
+            <p>{{ user.pseudo }}</p>
           </div>
         </div>
       </div>
+
+
     </form>
   </div>
 {% endblock %}
