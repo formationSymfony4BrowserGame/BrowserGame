@@ -20,9 +20,12 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             //
-            ->add('mail', emailType::class)
+            ->add('mail', emailType::class,[
+                'label' => 'Email',
+            ])
             ->add('pseudo', TextType::class)
             ->add('plainPassword', PasswordType::class, [
+                'label' => 'Mot de passe',
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,

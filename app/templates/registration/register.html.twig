@@ -14,9 +14,14 @@
                 {# Commencer un formulaire #}
                 {{ form_start(registrationForm) }}
                     {# Appel des champs du formulaire #}
-                    <label class="label" for="inputMail">{{ form_row(registrationForm.mail, {label: 'Email'}) }}</label>
-                    <label class="label" for="inputMail">{{ form_row(registrationForm.pseudo) }}</label>
-                    <label class="label" for="inputMail">{{ form_row(registrationForm.plainPassword, {label: 'Mot de passe'}) }}</label>
+                    <label class="label">{{ form_label(registrationForm.mail) }}</label>
+                    <input class="input" {{ form_widget(registrationForm.mail) }}>
+
+                    <label class="label">{{ form_label(registrationForm.pseudo) }}</label>
+                    <input class="input" {{ form_widget(registrationForm.pseudo) }}>
+
+                    <label class="label">{{ form_label(registrationForm.plainPassword) }}</label>
+                    <input class="input" {{ form_widget(registrationForm.plainPassword) }}>
 
                     <center><button class="button is-primary mt-5" type="submit">S'inscrire</button></center>
                 {{ form_end(registrationForm) }}
