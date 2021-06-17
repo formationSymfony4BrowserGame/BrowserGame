@@ -10,7 +10,7 @@
     <div class="columns mt-6">
         <div class="column is-one-third is-offset-4">
             <div class="field">
-                <center><h1  class="label" style="font-size: 2.5em;">Inscription</h1></center>
+                <center><h1  class="title" style="font-size: 2.5em;">Inscription</h1></center>
                 {# Commencer un formulaire #}
                 {{ form_start(registrationForm) }}
                     {# Appel des champs du formulaire #}
@@ -24,7 +24,9 @@
 
                     {{ form_errors(registrationForm.plainPassword) }}
                     <label class="label">{{ form_label(registrationForm.plainPassword) }}</label>
-                    <input class="input" {{ form_widget(registrationForm.plainPassword) }}
+                    <div class="control">
+                        <input class="input" {{ form_widget(registrationForm.plainPassword) }}
+                    </div>
 
                     <center><button class="button is-primary mt-5" type="submit">S'inscrire</button></center>
                 {{ form_end(registrationForm) }}
