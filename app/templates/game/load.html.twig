@@ -3,18 +3,40 @@
 {% block title %} - Charger une partie{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/app/src/Controller/GameController.php'|file_link(0) }}">src/Controller/GameController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/app/templates/game/load.html.twig'|file_link(0) }}">templates/game/load.html.twig</a></code></li>
-    </ul>
+<div class="container" id="play-container">
+    <div class="dropdown is-active is-centered">
+        <div class="dropdown-trigger">
+            <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                <span>Parties sauvegardées</span>
+                <span class="icon is-small">
+                    <i class="fas fa-angle-down" aria-hidden="true"></i>
+                </span>
+            </button>
+        </div>
+        {# saved games #}
+        <div class="dropdown-menu" id="dropdown-menu" role="menu">
+            <div class="dropdown-content">
+                {% for game in games %}
+                    <a href="/game/load/{{game.id}}" class="dropdown-item">
+                        {{ game.date }}
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {# displayed if the player chose a saved game #}
+    {% if players is defined %} 
+        <div class="is-centered">   
+            <ol>
+                {% for player in players %}
+                <li> {{ player.pseudo }} </li>
+                {% endfor %}
+            </ol>
+        </div>
+        <div class="is-centered">   
+            <a href="{{ path('game') }}" class="button is-danger is-uppercase">Jouer</a>
+        </div>
+    {% endif %}
 </div>
 {% endblock %}

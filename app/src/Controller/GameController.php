@@ -43,7 +43,30 @@ class GameController extends AbstractController
      */
     public function loadGame(): Response
     {
-        return $this->render('game/load.html.twig');
+        //connected player
+        $user = $this->getuser();
+
+        //player's saved games
+        $games = $user->getGames();
+
+        return $this->render('game/load.html.twig', [
+            'games' => $games,
+        ]);                
+    }
+
+    /**
+     * @Route("/game/load/{id}", name="players")
+     */
+    public function playersloadGame($id): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $game= $em->getRepository(Game::class)->findOneBy([
+            'id' => $id,
+        ]);
+        $players = $game-> getPlayers();
+        return $this->render('game/load.html.twig', [
+            'players' => $players,
+        ]);
     }
 
     /**
