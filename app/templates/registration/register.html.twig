@@ -14,14 +14,17 @@
                 {# Commencer un formulaire #}
                 {{ form_start(registrationForm) }}
                     {# Appel des champs du formulaire #}
+                    {{ form_errors(registrationForm.mail) }}
                     <label class="label">{{ form_label(registrationForm.mail) }}</label>
-                    <input class="input" {{ form_widget(registrationForm.mail) }}>
+                    {{ form_widget(registrationForm.mail) }}
 
+                    {{ form_errors(registrationForm.pseudo) }}
                     <label class="label">{{ form_label(registrationForm.pseudo) }}</label>
-                    <input class="input" {{ form_widget(registrationForm.pseudo) }}>
+                    {{ form_widget(registrationForm.pseudo) }}
 
+                    {{ form_errors(registrationForm.plainPassword) }}
                     <label class="label">{{ form_label(registrationForm.plainPassword) }}</label>
-                    <input class="input" {{ form_widget(registrationForm.plainPassword) }}>
+                    <input class="input" {{ form_widget(registrationForm.plainPassword) }}
 
                     <center><button class="button is-primary mt-5" type="submit">S'inscrire</button></center>
                 {{ form_end(registrationForm) }}
