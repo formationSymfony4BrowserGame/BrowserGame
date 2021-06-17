@@ -11,7 +11,7 @@
     {# Commencer un formulaire #}
     {{ form_start(registrationForm) }}
         {# Appel des champs du formulaire #}
-        {{ form_row(registrationForm.mail) }}
+        {{ form_row(registrationForm.mail, {label: 'Email'}) }}
         {{ form_row(registrationForm.pseudo) }}
         {{ form_row(registrationForm.plainPassword, {label: 'Mot de passe'}) }}
 
