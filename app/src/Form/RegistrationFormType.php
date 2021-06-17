@@ -11,6 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 
 class RegistrationFormType extends AbstractType
 {
@@ -18,7 +19,7 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             //
-            ->add('mail')
+            ->add('mail', emailType::class)
             ->add('pseudo')
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
