@@ -3014,6 +3014,11 @@
   "resolved" "https://registry.npmjs.org/html-entities/-/html-entities-2.3.2.tgz"
   "version" "2.3.2"
 
+"html-to-element@^1.0.0":
+  "integrity" "sha1-JxnJ9UlsRKHBQhzswE7mI5/DluI="
+  "resolved" "https://registry.npmjs.org/html-to-element/-/html-to-element-1.0.0.tgz"
+  "version" "1.0.0"
+
 "htmlparser2@^6.1.0":
   "integrity" "sha512-gyyPk6rgonLFEDGoeRgQNaEUvdJ4ktTmmUh/h2t7s+M8oPpIPxgNACWa+6ESR57kXstwqPiCut0V8NRpcwgU7A=="
   "resolved" "https://registry.npmjs.org/htmlparser2/-/htmlparser2-6.1.0.tgz"

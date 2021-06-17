@@ -79,8 +79,7 @@ class GameController extends AbstractController
      */
     public function game(Request $request): Response
     {
-        $get = $request->query->all();
-        dump($get['new']);
+        dump($request->request->all());
         return $this->render('game/game.html.twig', [
             ''
         ]);

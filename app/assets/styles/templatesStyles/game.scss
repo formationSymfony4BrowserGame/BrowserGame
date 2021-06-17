@@ -8,9 +8,16 @@
   }
 
   form {
+    flex-grow: 0;
+    width: max-content;
+    margin-left: auto;
+    margin-right: auto;
     * {
-      width: max-content;
-      flex-grow: 0;
+      flex-grow: 1;
+      margin-right: auto;
+    }
+    .label {
+      margin-right: 1rem;
     }
   }
 }

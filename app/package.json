@@ -17,7 +17,8 @@
     "yarn": "^1.22.10"
   },
   "dependencies": {
-    "core-js": "^3.14.0"
+    "core-js": "^3.14.0",
+    "html-to-element": "^1.0.0"
   },
   "scripts": {
     "dev-server": "./node_modules/.bin/encore dev-server",
