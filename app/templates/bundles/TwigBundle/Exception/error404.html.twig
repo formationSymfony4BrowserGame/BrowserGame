@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+{% block title %} - Erreur 404 {% endblock %}
+
+{% block body %}
+
+    <section class="section is-vcentered has-text-centered">
+        <figure class="image">
+            <img src="{{ asset('build/images/404.png') }}" alt="">
+        </figure>
+        <h2 class="title mt-2">Oups!</h2>
+        <h3>
+            La page que vous recherchez semble introuvable!
+        </h3>
+    </section>
+
+{% endblock %}
