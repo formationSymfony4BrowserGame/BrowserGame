@@ -60,10 +60,19 @@
                 {# Right part of the main menu #}
                 <div class='navbar-end'>
                     <div class='navbar-item'>
-                        <div class='buttons'>
-                            <a href='{{ path('app_register') }}' class='button is-primary'>S'inscrire</a>
-                            <a href='{{ path('app_login') }}' class='button is-primary'>Se connecter</a>
-                        </div>
+                        {% if not app.user %}
+                            <div class='buttons'>
+                                <a href='{{ path('app_register') }}' class='button is-primary'>S'inscrire</a>
+                                <a href='{{ path('app_login') }}' class='button is-primary'>Se connecter</a>
+                            </div>
+                        {% else %}
+                            <a href="{{ path('app_logout') }}" class="button is-primary">Se déconnecter</a>    
+                        {% endif %}
+                        {% if app.user %}
+                            <span class="icon ml-5 is-large has-background-white">
+                                <a href="#"><i class="has-text-primary" data-feather="user"></i></a>
+                            </span>
+                        {% endif %}
                     </div>
                 </div>
             </div>
