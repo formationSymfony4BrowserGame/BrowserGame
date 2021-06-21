@@ -12,7 +12,7 @@
 {% block body %}
 
   <div class="container" id="play-container">
-    <form action="{{ path("game") }}" method="POST">
+    <form action="{{ path("game") }}" method="post">
 
       <div class="field">
 
@@ -29,9 +29,9 @@
       </div>
       <div class="player-names-wrapper" id="player-names-wrapper">
         <div class="field is-horizontal">
-          <label for="" class="label">Joueur 1</label>
+          <label for="1" class="label">Joueur 1</label>
           <div class="control">
-            <input type="text" class="input" id="1" name="1" value="{{ user.pseudo }}" disabled>
+            <input type="text" class="input" id="1" name="1" value="{{ user.pseudo }}">
           </div>
         </div>
         <div id="other-players"></div>

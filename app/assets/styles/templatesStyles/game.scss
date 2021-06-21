@@ -1,12 +1,14 @@
+$content-height: calc(100vh - 144px - 68px); //content height = page height - footer height - header height
+
 #play-container {
-  // sert à (à peut près) centrer verticalement les bouttons
-  height: 80vh;
+  // center the buttons in the play.html.twig template
+  height: $content-height;
   display: flex;
   align-items: center;
   & > * {
     flex-grow: 1;
   }
-
+  // center the forms in new.html.twig
   form {
     flex-grow: 0;
     width: max-content;
@@ -22,3 +24,77 @@
   }
 }
 
+// .player height = 1-4 of (content height - all grip gap - player-list padding)
+// so that 4 .player can fit on the screen
+$player-height: calc((#{$content-height} - 3rem - 1.5rem) / 4);
+#game-container {
+  height: $content-height;
+  margin: 0;
+
+  .player-list {
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: repeat(auto-fit, calc(50% - .5rem));
+
+    .player {
+      box-sizing: border-box;
+      flex: 0 0 0;
+      height: $player-height;
+      &-score {
+        display: flex;
+      }
+    }
+  }
+
+  .pickomino {
+    flex: 0 0 3.5vw;
+    // pickomino height = .player height - .player name height
+    // so the pickomino can fit in a player container without making it longer
+    height: calc(#{$player-height} - 33px); 
+    border: dotted 1px black;
+  }
+
+  .game-board {
+    padding: 0;
+    $row-height: calc(#{$content-height} / 3);
+    .skewer {
+      height: $row-height;
+      .columns {
+        margin-top: 0;
+        height: 100%;
+        align-items: flex-end;
+        justify-content: space-evenly;      
+      }
+    }
+  
+    .throw {
+      height: $row-height;
+      align-items: flex-start;
+      padding-top: 2rem;
+      .button {
+        transform: translateY(25%);
+      }
+    }
+
+    .hand {
+      height: $row-height;
+      align-items: center;
+    }
+
+    .dices {
+      .dice {
+        $dice-size: 5.2084vw;
+        height: $dice-size;
+        padding: 0;
+        &.empty {
+          border: dotted 1px black;
+        }
+      }
+    }
+
+    .column.button {
+      padding: 0;
+      line-height: 2.5em;
+    }
+  }
+}

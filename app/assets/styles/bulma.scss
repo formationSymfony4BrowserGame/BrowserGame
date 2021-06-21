@@ -3,6 +3,12 @@ $scheme-main: #dfe6ed; //color the header
 $scheme-main-bis: #dfe6ed; // color the footer
 $primary: #4b5c6b; // primary color
 $link: $primary; // color links and active navbar-items
+// set icons default size
+$icon-dimensions-small: 24px; // native size of feather-icons
+$icon-dimensions: 30px;
+$icon-dimensions-medium: 40px; // help to get the same height between the mobile and the desktop navbar
+$icon-dimensions-large: 60px;
+
 // here add imports from bulma
 
 // base imports
