@@ -24,7 +24,7 @@ $content-height: calc(100vh - 144px - 68px); //content height = page height - fo
   }
 }
 
-// .player height = 1-4 of (content height - all grip gap - player-list padding)
+// .player height = 1/4 of (content height - all grip gap - player-list padding)
 // so that 4 .player can fit on the screen
 $player-height: calc((#{$content-height} - 3rem - 1.5rem) / 4);
 #game-container {
