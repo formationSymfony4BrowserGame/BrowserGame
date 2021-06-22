@@ -25,7 +25,7 @@ class AppFixtures extends Fixture
     {
         for ($i = 1; $i < 6; ++$i) {
                         
-            //Créer une historique pour les users
+            //Création des users
             $user = new User();
             $currentUser = 'user'.$i;
             $user->setPseudo($currentUser);
@@ -34,7 +34,7 @@ class AppFixtures extends Fixture
             $user->setRoles(['ROLE_USER']);
             $user->setPassword($this->passwordEncoder->encodePassword($user, $currentUser));
 
-            //Créer une historique pour le 4 eme user
+            //Création d'une historique de jeu pour le 4 éme user
             if($i === 4){
                 $history = new History();
                 $history->setPlayers([$currentUser, 'player1', 'player2', 'player3']);
@@ -45,7 +45,7 @@ class AppFixtures extends Fixture
                 $manager->persist($history);
             }
 
-            //Créer des jeux sauvgardé pour tous les users
+            //Créer des jeux sauvgardés pour tous les users
             $game = new Game();
             $game->setUser($user);
             $game->setPlayerCount(4);
@@ -56,8 +56,7 @@ class AppFixtures extends Fixture
             $game->setRemainingDices([4,5,6,7,8]);
             $game->setGameState("Dice");
 
-
-            // Les 3 autres joueurs
+            //Créations des 4 joueurs qui participent au même jeu sauvgardé
             for ($j = 1; $j < 5; ++$j){
                 $player = new Player();
                 // Le premier joueur qui est l'utilisateur connecté
@@ -66,6 +65,7 @@ class AppFixtures extends Fixture
                     $player->setRanking(1);
                     $player->setPickominos([32,33]);
                     $player->setGame($game);
+                // Les 3 autres joueurs
                 }else{
                     $player->setPseudo('pseudo' .$i.$j);
                     $player->setRanking($j);
