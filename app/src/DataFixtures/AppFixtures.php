@@ -45,7 +45,7 @@ class AppFixtures extends Fixture
                 $manager->persist($history);
             }
 
-            //Créer des jeux sauvgardés pour tous les users
+            //Création des jeux sauvgardés pour tous les users
             $game = new Game();
             $game->setUser($user);
             $game->setPlayerCount(4);
@@ -56,7 +56,7 @@ class AppFixtures extends Fixture
             $game->setRemainingDices([4,5,6,7,8]);
             $game->setGameState("Dice");
 
-            //Créations des 4 joueurs qui participent au même jeu sauvgardé
+            //Création des 4 joueurs qui participent au même jeu sauvgardé
             for ($j = 1; $j < 5; ++$j){
                 $player = new Player();
                 // Le premier joueur qui est l'utilisateur connecté
