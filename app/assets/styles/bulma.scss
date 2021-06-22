@@ -23,10 +23,14 @@ $icon-dimensions-large: 60px;
 @import "~bulma/sass/elements/title.sass";
 @import "~bulma/sass/elements/icon.sass";
 
+
 // components imports
 @import "~bulma/sass/components/navbar.sass";
 @import "~bulma/sass/components/tabs.sass";
 @import "~bulma/sass/components/card.sass";
+@import "~bulma/sass/components/message.sass";
+@import "~bulma/sass/components/dropdown.sass";
+
 
 // form imports
 @import "~bulma/sass/form/_all.sass";

@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Game;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -64,6 +66,13 @@ class GameController extends AbstractController
      */
     public function playersloadGame($id): Response
     {
+        //connected player
+        $user = $this->getuser();
+
+        //player's saved games
+        $games = $user->getGames();
+        
+        //find players of the saved game
         $em = $this->getDoctrine()->getManager();
         $game= $em->getRepository(Game::class)->findOneBy([
             'id' => $id,
@@ -71,6 +80,7 @@ class GameController extends AbstractController
         $players = $game-> getPlayers();
         return $this->render('game/load.html.twig', [
             'players' => $players,
+            'games' => $games,
         ]);
     }
 
