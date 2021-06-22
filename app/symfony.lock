@@ -13,5 +13,8 @@
         "files": [
             "src/DataFixtures/AppFixtures.php"
         ]
+    },
+    "symfony/serializer-pack": {
+        "version": "v1.0.4"
     }
 }

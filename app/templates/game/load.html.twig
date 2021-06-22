@@ -38,7 +38,7 @@
                 <li> {{ player.pseudo }} </li>
                 {% endfor %}
             </ol>
-            <a href="{{ path('game') }}" class="button is-danger is-uppercase">Jouer</a>
+            <a href="{{ path('loaded', { 'id': id }) }}" class="button is-danger is-uppercase">Jouer</a>
         </div>
     </section>
     {% endif %}

@@ -8,6 +8,10 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
+use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
 
 class GameController extends AbstractController
 {
@@ -69,18 +73,34 @@ class GameController extends AbstractController
         //connected player
         $user = $this->getuser();
 
+        //check if user is connected
+        if (empty($user)) {
+            return $this->render('accueil/index.html.twig', [
+                'message' => "Connectez-Vous pour pouvoir lancer le jeu",
+            ]);                
+        }
+
         //player's saved games
         $games = $user->getGames();
-        
+
         //find players of the saved game
         $em = $this->getDoctrine()->getManager();
         $game= $em->getRepository(Game::class)->findOneBy([
             'id' => $id,
         ]);
+
+        // 
+        if ($user !== $game->getUser()) {
+            return $this->render('accueil/index.html.twig', [
+                'message' => "Cette partie ne vous appartient pas",
+            ]);    
+        }
+
         $players = $game-> getPlayers();
         return $this->render('game/load.html.twig', [
             'players' => $players,
             'games' => $games,
+            'id' => $id
         ]);
     }
 
@@ -97,25 +117,46 @@ class GameController extends AbstractController
     /**
      * @Route("/game/{id}", name="loaded")
      */
-    public function loadedGame(Request $request, $id): Response
+    public function loadedGame($id): Response
     {
         $em = $this->getDoctrine()->getManager();
         $game= $em->getRepository(Game::class)->findOneBy([
             'id' => $id,
         ]);
+
+        // get the player names for the game page
         $playerNames = $game->getPlayers()->map(function($player) {
             return $player->getPseudo();
         });
+
+        $user = $this->getuser();
+
+        //check if user is connected and if he's the game proprietary
+        if (empty($user)) {
+            return $this->render('accueil/index.html.twig', [
+                'message' => "Connectez-Vous pour pouvoir lancer le jeu",
+            ]);                
+        } else if ($user !== $game->getUser()) {
+            return $this->render('accueil/index.html.twig', [
+                'message' => "Cette partie ne vous appartient pas",
+            ]);    
+        }
+
+        $encoders = [new JsonEncoder()];
+        $normalizers = [new GetSetMethodNormalizer()];
+
+        $serializer = new Serializer($normalizers, $encoders);
+
+        $jsonGame = $serializer->serialize($game, 'json', [
+            AbstractNormalizer::IGNORED_ATTRIBUTES => ['user', 'date'],
+            AbstractNormalizer::CIRCULAR_REFERENCE_HANDLER => function ($object, $format, $context) {
+                return $object->getId();
+            }
+        ]);
+
         return $this->render('game/game.html.twig', [
-            'players' => $game-> getPlayers(),
-            'init' => [
-                'playerCount' => $game->getPlayerCount(),
-                'currentPlayerId' => $game->getCurrentPlayerId(),
-                'hand' => $game->getHand(),
-                'remainingDices' => $game->getRemainingDices(),
-                'gameState' => $game->getGameState(),
-                'players' => $game->getPlayers(),
-            ]
+            'players' => $playerNames,
+            'game' => $jsonGame,
         ]);
     }
 }
