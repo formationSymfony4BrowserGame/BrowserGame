@@ -68,7 +68,7 @@ class AppFixtures extends Fixture
                     $player->setGame($game);
                 }else{
                     $player->setPseudo('pseudo' .$i.$j);
-                    $player->setRanking($j+1);
+                    $player->setRanking($j);
                     $player->setPickominos([2 .$j]);
                     $player->setGame($game);
                 }           
