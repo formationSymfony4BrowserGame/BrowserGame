@@ -33,6 +33,9 @@ class AppFixtures extends Fixture
             $user->setMail($currentMail);
             $user->setRoles(['ROLE_USER']);
             $user->setPassword($this->passwordEncoder->encodePassword($user, $currentUser));
+            $manager->persist($user);
+            $manager->flush();
+            
 
             //Création d'une historique de jeu pour le 4 éme user
             if($i === 4){
@@ -47,11 +50,12 @@ class AppFixtures extends Fixture
 
             //Création des jeux sauvgardés pour tous les users
             $game = new Game();
+            $id = $user->getId();
             $game->setUser($user);
             $game->setPlayerCount(4);
             $now = new DateTime();
             $game->setDate($now);
-            $game->setCurrentPlayerId(4);
+            $game->setCurrentPlayerId($id);
             $game->setHand([1,2,3]);
             $game->setRemainingDices([4,5,6,7,8]);
             $game->setGameState("Dice");
@@ -76,7 +80,6 @@ class AppFixtures extends Fixture
                 $manager->persist($player);
             }
 
-            $manager->persist($user);
             $manager->persist($game);
 
         }
