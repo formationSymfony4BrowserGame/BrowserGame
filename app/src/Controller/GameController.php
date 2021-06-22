@@ -75,12 +75,37 @@ class GameController extends AbstractController
     }
 
     /**
-     * @Route("/game/gamepage", name="game")
+     * @Route("/game/", name="game")
      */
     public function game(Request $request): Response
     {
         return $this->render('game/game.html.twig', [
             'players' => $request->request->all()
+        ]);
+    }
+
+    /**
+     * @Route("/game/{id}", name="loaded")
+     */
+    public function loadedGame(Request $request, $id): Response
+    {
+        $em = $this->getDoctrine()->getManager();
+        $game= $em->getRepository(Game::class)->findOneBy([
+            'id' => $id,
+        ]);
+        $playerNames = $game->getPlayers()->map(function($player) {
+            return $player->getPseudo();
+        });
+        return $this->render('game/game.html.twig', [
+            'players' => $game-> getPlayers(),
+            'init' => [
+                'playerCount' => $game->getPlayerCount(),
+                'currentPlayerId' => $game->getCurrentPlayerId(),
+                'hand' => $game->getHand(),
+                'remainingDices' => $game->getRemainingDices(),
+                'gameState' => $game->getGameState(),
+                'players' => $game->getPlayers(),
+            ]
         ]);
     }
 }
