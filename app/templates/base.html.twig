@@ -54,7 +54,7 @@
                         To use active link styles we use a Twig if: if route_name == routeName we add the "is-active" class to the link.
                     #}
                     <a href="{{ path('accueil') }}" class="navbar-item is-tab {% if route_name == 'accueil' %}is-active {% else %} {% endif %}">Accueil</a>
-                    <a href='' class="navbar-item is-tab {% if route_name == 'regles' %}is-active {% else %} {% endif %}">Règles</a>
+                    <a href='{{ path('regle') }}' class="navbar-item is-tab {% if route_name == 'regles' %}is-active {% else %} {% endif %}">Règles</a>
                     <a href='' class="navbar-item is-tab {% if route_name == 'jouer' %}is-active {% else %} {% endif %}">Jouer</a>
                 </div>
                 {# Right part of the main menu #}
