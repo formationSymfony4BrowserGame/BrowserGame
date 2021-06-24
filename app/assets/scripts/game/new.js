@@ -7,7 +7,7 @@ const names = ['', '', '', '', '', ''] // store entered names to prevent data lo
 // return a HTMLElement containing a player name field
 const nameField = (playerNumber, name) => htmlToElement(`
 <div class="field is-horizontal">
-  <label for="${playerNumber}" class="label">Joueur ${playerNumber}</label>
+  <label for="${playerNumber}" class="label">Joueur ${playerNumber + 1}</label>
   <div class="control">
     <input type="text" class="input" id="${playerNumber}" name="${playerNumber}" value="${name}">
   </div>
@@ -22,9 +22,9 @@ const updateNewGameForm = () => {
   const playerCount = select.value
   // remove all player name fields except the first
   nameForm.innerHTML = ''
-  // i∈[2,playerCount], add playerCount-1 times a player name field to the form
-  for (let i = 2; i <= playerCount; i++) {
-    const element = nameField(i, names[i - 2])
+  // i∈[1,playerCount[, add playerCount-1 times a player name field to the form
+  for (let i = 1; i < playerCount; i++) {
+    const element = nameField(i, names[i - 1])
     element.oninput = updateNames // add the updateNames EventHandler to the oninput event of the name fields
     nameForm.appendChild(element)
   }

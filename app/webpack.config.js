@@ -23,6 +23,7 @@ Encore
   .addEntry('app', './assets/scripts/app.js')
   .addEntry('new', './assets/scripts/game/new.js')
   .addEntry('load', './assets/scripts/game/load.js')
+  .addEntry('game', './assets/scripts/game/game.js')
 
   .addStyleEntry('Bulma', './assets/styles/bulma.scss')
   .addStyleEntry('Styles', './assets/styles/styles.scss')
@@ -50,15 +51,18 @@ Encore
   // enables hashed filenames (e.g. app.abc123.css)
   .enableVersioning(Encore.isProduction())
 
-  .configureBabel((config) => {
-    config.plugins.push('@babel/plugin-proposal-class-properties')
+  // .configureBabel((config) => {
+  //   config.plugins.push('@babel/plugin-proposal-class-properties')
+  // })
+  .configureBabel(config => {
+    config.presets = []
   })
 
-  // enables @babel/preset-env polyfills
-  .configureBabelPresetEnv((config) => {
-    config.useBuiltIns = 'usage'
-    config.corejs = 3
-  })
+// enables @babel/preset-env polyfills
+// .configureBabelPresetEnv((config) => {
+//   config.useBuiltIns = 'usage'
+//   config.corejs = 3.15
+// })
 
   // enables Sass/SCSS support
   .enableSassLoader()

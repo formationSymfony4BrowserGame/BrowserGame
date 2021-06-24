@@ -83,9 +83,13 @@ $player-height: calc((#{$content-height} - 3rem - 1.5rem) / 4);
 
     .dices {
       .dice {
+        display: grid;
+        place-items: center;
         $dice-size: 5.2084vw;
         height: $dice-size;
         padding: 0;
+        margin-right: 1px;
+        border: solid 1px black;
         &.empty {
           border: dotted 1px black;
         }
