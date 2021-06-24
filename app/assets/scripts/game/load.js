@@ -1,31 +1,33 @@
-// import axios from 'axios'
+import axios from 'axios'
 import htmlToElement from 'html-to-element'
 
 const select = document.getElementById('selected_game')
 
 const displayName = document.getElementById('display_name')
 
-// GET API REST
-
-// axios
-// .get('http://localhost:8181/api/players/')
-// .then(function (response) {
-// })
+const getPlayers = async (gameId) => {
+  const res = await axios.get('/game/load/' + gameId + '/players')
+  console.log(res)
+  return res.data
+}
 
 // Test pour l'affichage des pseudos des joueurs
 
-const displayNameGame = () => {
-  const id = select.value
-  if (id !== 'without') {
-    const display = () => htmlToElement(`
-    <h2>Hello</h2>
+const displayNameGame = async () => {
+  const gameId = select.value
+  const playerNames = await getPlayers(gameId)
+  const list = htmlToElement(`
+    <ul></ul>
+  `)
+  playerNames.forEach(player => {
+    const listElement = (player) => htmlToElement(`
+    <li>${player}</li>
     `)
-    const players = display()
-    displayName.appendChild(players)
-  } else {
-    const players = document.createElement('p')
-    displayName.appendChild(players)
-  }
+    list.appendChild(listElement(player))
+  })
+  displayName.innerHTML = ''
+  displayName.appendChild(list)
 }
 
+displayNameGame()
 select.onchange = displayNameGame

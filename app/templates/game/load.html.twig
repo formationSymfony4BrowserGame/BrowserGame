@@ -9,25 +9,29 @@
 
 {% block body %}
 
-<main class="container">
-    <section class="section">
-        <div class="is-vcentered has-text-centered">
-            <form action="{{ path("game") }}" method="post">
-                <div class="control p-2 mx-6">
+<main class="container" id="play-container">
+    <form action="{{ path("game") }}" method="post">
+        <div class="field">
+            <label class="label" for="joueurs">Parties Sauvegardées</label>
+            <div class="control p-2 mx-6">
+                <div class="select">
                     <select id="selected_game">
-                        <option value="without"> Parties sauvgardées </option>
                         {% for game in games %}
                             <option value="{{ game.id }}"> {{ game.date|date("d/m/Y") }} </option>
                         {% endfor %}
                     </select>
                 </div>
-                <div class="control mt-4">
-                    <input class="button is-link" type="submit" value="Jouer">
-                </div>
-            </form>
+            </div>
         </div>
-        <div class="is-vcentered has-text-centered mt-2" id="display_name"></div>
-    </section>
+        <div class="player-names-wrapper" id="player-names-wrapper">
+            <div class="content is-vcentered has-text-centered p-5" id="display_name">CHARGEMENT EN COURS</div>
+        </div>
+        <div class="field submit">
+            <div class="control">
+                <input class="button is-link" type="submit" value="Jouer">
+            </div>
+        </div>
+    </form>
 
 </main>
 {% endblock %}

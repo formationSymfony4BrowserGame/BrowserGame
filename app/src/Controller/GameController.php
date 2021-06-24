@@ -68,6 +68,28 @@ class GameController extends AbstractController
     }
 
     /**
+     * @Route("/game/load/{id}/players", name="load_players")
+     */
+    public function loadPlayers(int $id): Response {
+        $em = $this->getDoctrine()->getManager();
+        $game= $em->getRepository(Game::class)->findOneBy([
+            'id' => $id,
+        ]);
+
+        // get the player names for the game page
+        $playerNames = $game->getPlayers()->map(function($player) {
+            return $player->getPseudo();
+        });
+
+        $serializer = new Serializer([new GetSetMethodNormalizer()], [new JsonEncoder()]);
+
+        $response = new Response();
+        $response->setContent($serializer->serialize($playerNames, 'json'));
+        $response->headers->set('Content-Type', 'application/json');
+        return $response;
+    }
+
+    /**
      * @Route("/game/", name="game")
      */
     public function game(Request $request): Response
@@ -105,10 +127,7 @@ class GameController extends AbstractController
             ]);    
         }
 
-        $encoders = [new JsonEncoder()];
-        $normalizers = [new GetSetMethodNormalizer()];
-
-        $serializer = new Serializer($normalizers, $encoders);
+        $serializer = new Serializer([new GetSetMethodNormalizer()], [new JsonEncoder()]);
 
         $jsonGame = $serializer->serialize($game, 'json', [
             AbstractNormalizer::IGNORED_ATTRIBUTES => ['user', 'date'],
