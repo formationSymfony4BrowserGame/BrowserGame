@@ -5,6 +5,8 @@ const select = document.getElementById('selected_game')
 
 const displayName = document.getElementById('display_name')
 
+const form = document.getElementById('form')
+
 const getPlayers = async (gameId) => {
   const res = await axios.get('/game/load/' + gameId + '/players')
   console.log(res)
@@ -15,6 +17,7 @@ const getPlayers = async (gameId) => {
 
 const displayNameGame = async () => {
   const gameId = select.value
+  form.action = '/game/' + gameId
   const playerNames = await getPlayers(gameId)
   const list = htmlToElement(`
     <ul></ul>
