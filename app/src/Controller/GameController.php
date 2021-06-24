@@ -59,6 +59,12 @@ class GameController extends AbstractController
         //connected player
         $user = $this->getuser();
 
+        if (empty($user)) {
+            return $this->render('accueil/index.html.twig', [
+                'message' => "Connectez-Vous pour pouvoir lancer le jeu",
+            ]);                
+        }
+
         //player's saved games
         $games = $user->getGames();
 

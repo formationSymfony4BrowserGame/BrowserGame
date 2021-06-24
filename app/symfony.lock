@@ -2,20 +2,6 @@
     "api-platform/api-pack": {
         "version": "v1.3.0"
     },
-    "api-platform/core": {
-        "version": "2.5",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "2.5",
-            "ref": "a93061567140e386f107be75340ac2aee3f86cbf"
-        },
-        "files": [
-            "config/packages/api_platform.yaml",
-            "config/routes/api_platform.yaml",
-            "src/Entity/.gitignore"
-        ]
-    },
     "doctrine/data-fixtures": {
         "version": "1.5.0"
     },
@@ -30,9 +16,6 @@
         "files": [
             "src/DataFixtures/AppFixtures.php"
         ]
-    },
-    "fig/link-util": {
-        "version": "1.1.2"
     },
     "nelmio/cors-bundle": {
         "version": "1.5",
@@ -51,8 +34,5 @@
     },
     "symfony/serializer-pack": {
         "version": "v1.0.4"
-    },
-    "willdurand/negotiation": {
-        "version": "3.0.0"
     }
 }

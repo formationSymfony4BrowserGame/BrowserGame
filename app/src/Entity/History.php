@@ -4,11 +4,9 @@ namespace App\Entity;
 
 use App\Repository\HistoryRepository;
 use Doctrine\ORM\Mapping as ORM;
-use ApiPlatform\Core\Annotation\ApiResource;
 
 
 /**
- * @ApiResource()
  * @ORM\Entity(repositoryClass=HistoryRepository::class)
  */
 class History
