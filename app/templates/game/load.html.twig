@@ -2,45 +2,32 @@
 
 {% block title %} - Charger une partie{% endblock %}
 
+{% block javascripts %}
+  {{ encore_entry_script_tags("load") }}
+{% endblock %}
+
+
 {% block body %}
 
 <main class="container">
     <section class="section">
         <div class="is-vcentered has-text-centered">
-            <div class="dropdown is-active">
-                <div class="dropdown-trigger">
-                    <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-                        <span>Parties sauvegardées</span>
-                        <span class="icon is-small">
-                            <i class="fas fa-angle-down" aria-hidden="true"></i>
-                        </span>
-                    </button>
-                </div>
-                {# saved games #}
-                <div class="dropdown-menu" id="dropdown-menu" role="menu">
-                    <div class="dropdown-content">
+            <form action="{{ path("game") }}" method="post">
+                <div class="control p-2 mx-6">
+                    <select id="selected_game">
+                        <option value="without"> Parties sauvgardées </option>
                         {% for game in games %}
-                            <a href="/game/load/{{game.id}}" class="dropdown-item">
-                                {{ game.date|date("m/d/Y") }}
-                            </a>
+                            <option value="{{ game.id }}"> {{ game.date|date("d/m/Y") }} </option>
                         {% endfor %}
-                    </div>
+                    </select>
                 </div>
-            </div>
+                <div class="control mt-4">
+                    <input class="button is-link" type="submit" value="Jouer">
+                </div>
+            </form>
         </div>
+        <div class="is-vcentered has-text-centered mt-2" id="display_name"></div>
     </section>
-    {# displayed if the player chose a saved game #}
-    {% if players is defined %} 
-    <section class="section">
-        <div class="is-vcentered has-text-centered">
-            <ol>
-                {% for player in players %}
-                <li> {{ player.pseudo }} </li>
-                {% endfor %}
-            </ol>
-            <a href="{{ path('loaded', { 'id': id }) }}" class="button is-danger is-uppercase">Jouer</a>
-        </div>
-    </section>
-    {% endif %}
+
 </main>
 {% endblock %}

@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Game;
+use App\Entity\Player;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Serializer;
@@ -63,45 +65,6 @@ class GameController extends AbstractController
         return $this->render('game/load.html.twig', [
             'games' => $games,
         ]);                
-    }
-
-    /**
-     * @Route("/game/load/{id}", name="players")
-     */
-    public function playersloadGame($id): Response
-    {
-        //connected player
-        $user = $this->getuser();
-
-        //check if user is connected
-        if (empty($user)) {
-            return $this->render('accueil/index.html.twig', [
-                'message' => "Connectez-Vous pour pouvoir lancer le jeu",
-            ]);                
-        }
-
-        //player's saved games
-        $games = $user->getGames();
-
-        //find players of the saved game
-        $em = $this->getDoctrine()->getManager();
-        $game= $em->getRepository(Game::class)->findOneBy([
-            'id' => $id,
-        ]);
-
-        // 
-        if ($user !== $game->getUser()) {
-            return $this->render('accueil/index.html.twig', [
-                'message' => "Cette partie ne vous appartient pas",
-            ]);    
-        }
-
-        $players = $game-> getPlayers();
-        return $this->render('game/load.html.twig', [
-            'players' => $players,
-            'games' => $games,
-            'id' => $id
-        ]);
     }
 
     /**
