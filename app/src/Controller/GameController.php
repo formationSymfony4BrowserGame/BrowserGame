@@ -14,6 +14,7 @@ use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\AbstractNormalizer;
 use Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 
 class GameController extends AbstractController
 {
@@ -87,7 +88,7 @@ class GameController extends AbstractController
             return $player->getPseudo();
         });
 
-        $serializer = new Serializer([new GetSetMethodNormalizer()], [new JsonEncoder()]);
+        $serializer = new Serializer([new ObjectNormalizer()], [new JsonEncoder()]);
 
         $response = new Response();
         $response->setContent($serializer->serialize($playerNames, 'json'));
