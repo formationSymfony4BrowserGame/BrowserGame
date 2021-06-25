@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
     "api-platform/api-pack": {
         "version": "v1.3.0"
     },
@@ -34,5 +35,9 @@
     },
     "symfony/serializer-pack": {
         "version": "v1.0.4"
+=======
+    "symfony/twig-pack": {
+        "version": "v1.0.1"
+>>>>>>> master
     }
 }
