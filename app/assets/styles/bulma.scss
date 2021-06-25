@@ -3,6 +3,12 @@ $scheme-main: #dfe6ed; //color the header
 $scheme-main-bis: #dfe6ed; // color the footer
 $primary: #4b5c6b; // primary color
 $link: $primary; // color links and active navbar-items
+// set icons default size
+$icon-dimensions-small: 24px; // native size of feather-icons
+$icon-dimensions: 30px;
+$icon-dimensions-medium: 40px; // help to get the same height between the mobile and the desktop navbar
+$icon-dimensions-large: 60px;
+
 // here add imports from bulma
 
 // base imports
@@ -17,10 +23,13 @@ $link: $primary; // color links and active navbar-items
 @import "~bulma/sass/elements/title.sass";
 @import "~bulma/sass/elements/icon.sass";
 
+
 // components imports
 @import "~bulma/sass/components/navbar.sass";
 @import "~bulma/sass/components/tabs.sass";
 @import "~bulma/sass/components/card.sass";
+@import "~bulma/sass/components/message.sass";
+
 
 // form imports
 @import "~bulma/sass/form/_all.sass";

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} - Charger une partie{% endblock %}
+
+{% block javascripts %}
+  {{ encore_entry_script_tags("load") }}
+{% endblock %}
+
+
+{% block body %}
+
+<main class="container" id="play-container">
+    <form action="{{ path("game") }}" method="post" id="form">
+        <div class="field">
+            <label class="label" for="joueurs">Parties Sauvegardées</label>
+            <div class="control p-2 mx-6">
+                <div class="select">
+                    <select id="selected_game">
+                        {% for game in games %}
+                            <option value="{{ game.id }}"> {{ game.date|date("d/m/Y") }} </option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="player-names-wrapper" id="player-names-wrapper">
+            <div class="content is-vcentered has-text-centered p-5" id="display_name">CHARGEMENT EN COURS</div>
+        </div>
+        <div class="field submit">
+            <div class="control">
+                <input class="button is-link" type="submit" value="Jouer">
+            </div>
+        </div>
+    </form>
+
+</main>
+{% endblock %}

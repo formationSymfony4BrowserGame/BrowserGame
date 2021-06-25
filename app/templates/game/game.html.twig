@@ -1,0 +1,88 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+  - Page de jeu{% endblock %}
+
+{% block body %}
+
+  <div class="columns" id="game-container">
+    {# left side containing the player list #}
+    <div class="column player-list is-2">
+        {# for each players we add a .player block, ids will be used by JS to update values #}
+        {% for ranking, playerName in players %}
+            <div class="player" id="{{ ranking }}">
+                <div class="">
+                    <div class="player-name">
+                        <span class="icon">
+                            <i class="has-text-primary" data-feather="user"></i>
+                        </span>
+                        <span class="title is-6">{{ playerName }}</span>
+                    </div>
+                </div>
+                <div class="player-score">
+                    <p>
+                        Score: <span class="player-score-value" id="{{ ranking }}">0</span> vers
+                    </p>
+                    <div class="pickomino player-score-pile" id="{{ ranking }}"></div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    {# right side containing the game board #}
+    <div class="column game-board">
+        {# worm skewer, removed worms will not be displayed  #}
+        <div class="skewer mx-5 my-0">
+            <div class="columns">
+                <div class="pickomino column"></div>
+                <div class="pickomino column"></div>
+                <div class="pickomino column"></div>
+                <div class="pickomino column"></div>
+                <div class="pickomino column"></div>
+                <div class="pickomino column"></div>
+                <div class="pickomino column"></div>
+                <div class="pickomino column"></div>
+                <div class="pickomino column"></div>
+                <div class="pickomino column"></div>
+                <div class="pickomino column"></div>
+                <div class="pickomino column"></div>
+                <div class="pickomino column"></div>
+                <div class="pickomino column"></div>
+                <div class="pickomino column"></div>
+                <div class="pickomino column"></div>
+            </div>
+        </div>
+        {# dices #}
+        <div class="columns throw m-0">
+            <div class="column is-6 is-offset-3">
+                <div class="columns dices">
+                    <div class="column dice empty"></div>
+                    <div class="column dice empty"></div>
+                    <div class="column dice empty"></div>
+                    <div class="column dice empty"></div>
+                    <div class="column dice empty"></div>
+                    <div class="column dice empty"></div>
+                    <div class="column dice empty"></div>
+                    <div class="column dice empty"></div>
+                </div>
+            </div>
+            <button class="column button is-1 is-offset-1 is-primary throw-button">Lancer</button>
+        </div>
+        {# current player hand #}
+        <div class="columns hand m-0">
+            <div class="column is-6 is-offset-3">
+                <div class="columns dices">
+                    <div class="column dice empty"></div>
+                    <div class="column dice empty"></div>
+                    <div class="column dice empty"></div>
+                    <div class="column dice empty"></div>
+                    <div class="column dice empty"></div>
+                    <div class="column dice empty"></div>
+                    <div class="column dice empty"></div>
+                    <div class="column dice empty"></div>
+                </div>
+            </div>
+            <div class="column button is-1 is-offset-1 is-primary is-light">Score: <span id="hand-score-value">0</span></div>
+        </div>
+    </div>
+  </div>
+{% endblock %}

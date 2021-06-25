@@ -17,8 +17,10 @@
     "yarn": "^1.22.10"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "core-js": "^3.14.0",
-    "feather-icons": "^4.28.0"
+    "feather-icons": "^4.28.0",
+    "html-to-element": "^1.0.0"
   },
   "scripts": {
     "dev-server": "./node_modules/.bin/encore dev-server",

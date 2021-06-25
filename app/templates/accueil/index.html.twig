@@ -19,7 +19,18 @@
 
                 {# link to the game's page #}
                 <div class="column is-one-third has-text-centered">
-                    <a href="#" class="button is-danger is-uppercase">Jouer</a>
+                    <a href="{{ path('play') }}" class="button is-primary is-uppercase">Jouer</a>
+                    {# If the user is not connected #}
+                    {% if message is defined %}
+                        <article class="message is-danger mt-2">
+                            <div class="message-header">
+                                <p>Vous n'êtes pas connecté</p>
+                            </div>
+                            <div class="message-body">
+                                <a href="{{ path('app_login') }}">{{message}}</a>
+                            </div>
+                        </article>
+                    {% endif %}
                 </div>  
             </div>
         </section>

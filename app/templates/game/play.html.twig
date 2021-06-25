@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} - Jouer{% endblock %}
+
+{% block body %}
+
+<div class="container" id="play-container">
+    <div class="buttons is-centered">
+        <a href="{{ path('new_game') }}" class="button is-primary">Nouvelle partie</a>
+        <a href="{{ path('load_game') }}" class="button is-primary" {% if games is empty %} disabled {% endif %} >Charger une partie</a>
+    </div>
+</div>
+{% endblock %}

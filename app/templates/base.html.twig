@@ -35,7 +35,7 @@
             {# Part of the navbar supposed to have the logo and the burger icon for mobile #}
             <div class='navbar-brand'>
                 <a class="navbar-item" href="{{ path('accueil') }}" id="logo">
-                    <img src="safari-pinned-tab.svg" id="svg-icon">
+                    <img src="/safari-pinned-tab.svg" id="svg-icon">
                     <p class="m-1 is-size-5">Pickomino</p>
                 </a>
                 {# Burger for mobile or small screens #}
@@ -55,7 +55,7 @@
                     #}
                     <a href="{{ path('accueil') }}" class="navbar-item is-tab {% if route_name == 'accueil' %}is-active {% else %} {% endif %}">Accueil</a>
                     <a href='{{ path('regle') }}' class="navbar-item is-tab {% if route_name == 'regle' %}is-active {% else %} {% endif %}">Règles</a>
-                    <a href='' class="navbar-item is-tab {% if route_name == 'jouer' %}is-active {% else %} {% endif %}">Jouer</a>
+                    <a href='{{ path('play') }}' class="navbar-item is-tab {% if route_name == 'play' %}is-active {% else %} {% endif %}">Jouer</a>
                 </div>
                 {# Right part of the main menu #}
                 <div class='navbar-end'>
@@ -69,7 +69,7 @@
                             <a href="{{ path('app_logout') }}" class="button is-primary">Se déconnecter</a>    
                         {% endif %}
                         {% if app.user %}
-                            <span class="icon ml-5 is-large has-background-white">
+                            <span class="icon ml-5 is-medium has-background-white">
                                 <a href="#"><i class="has-text-primary" data-feather="user"></i></a>
                             </span>
                         {% endif %}

@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(fields={"mail"}, message="Email déjà existant")
@@ -49,7 +50,7 @@ class User implements UserInterface
     private $role = [];
 
     /**
-     * @ORM\OneToMany(targetEntity=Game::class, mappedBy="UserId")
+     * @ORM\OneToMany(targetEntity=Game::class, mappedBy="User")
      */
     private $games;
 
