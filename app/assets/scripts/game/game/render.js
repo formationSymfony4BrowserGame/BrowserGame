@@ -34,7 +34,6 @@ const emptyDiceElement = () => htmlToElement('<div class="column dice empty"></d
 // fuctions used for render
 const updateSkewer = (data) => {
   const skewer = document.getElementById('skewer')
-  console.log(skewer)
   skewer.innerHTML = ''
   data.skewer.forEach(pickomino => {
     skewer.appendChild(pickominoElement(pickomino))
@@ -50,7 +49,6 @@ const updatePlayersScore = (data) => {
     })
     playerScore.children[0].children[0].innerHTML = score
     if (player.pickominos.length > 0) {
-      console.log(player.pickominos[-1])
       playerScore.replaceChild(pickominoElement(player.pickominos[player.pickominos.length - 1]), playerScore.children[1])
     } else {
       playerScore.replaceChild(emptyPickominoElement(), playerScore.children[1])

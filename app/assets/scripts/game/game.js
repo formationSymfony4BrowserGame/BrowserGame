@@ -33,7 +33,6 @@ const start = (players) => {
   }
   data.playerCount = data.players.length
 
-  console.log(data)
   render(data)
 }
 
@@ -54,7 +53,6 @@ const load = (game) => {
       })
     })
   })
-  console.log(data)
   render(data)
 }
 
