@@ -1,0 +1,104 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Règle{% endblock %}
+
+{% block body %}
+    <main class="container">
+
+        {# regle #}
+        <section class="section">
+            <p class="is-size-3 is-uppercase mb-5">Règle du jeu</p>
+            <div class="columns is-vcentered">
+                <div class="column is-two-four">
+                    <p>
+                        <span class="is-size-5 is-uppercase">but du jeu</span><br>
+                        A la fin du jeu, le vainqueur sera le dindon qui aura « becqueté » le plus grand
+                        nombre de vers.
+                    </p><br>
+
+                    <span class="is-size-5 is-uppercase">déroulement de la partie</span><br>
+                    <p>
+                        Chacun son tour de jeu, le joueur essaye d'obtenir un Pickomino parmi la « brochette
+                        de vers » ou parmi les Pickominos obtenu par ses adversaires.
+                        Après avoir lancé les 8 dés, il choisit parmi ce 1er tirage une valeur de dés (un
+                        chiffre ou un ver), prend tous les dés correspondants à son choix et est/sont placé(s)
+                        devant lui. Le joueur relance ensuite les dés restants.
+                        A chaque nouveau jet de dés, les dés qui indiquent un
+                        même symbole sont placés devant le joueur mais il ne peut choisir un symbole qu'il a choisi précédemment et qui
+                        se trouve donc déjà devant lui. A la fin de son tour, le joueur additionne la valeur
+                        de tous les dés qui se trouvent devant lui. Chaque
+                        ver rapporte 5 points.
+                    </p><br>
+
+                    <span class="is-size-5 is-uppercase">récupérer un pickomino</span><br>
+                    <p>
+                        <u class="is-size-6">option 1 :</u><br>
+                        Un joueur peut décider d’arrêter son tour prématurément pour récupérer un
+                        Pickomino dès qu’il en a la possibilité. Lorsqu'un joueur aligne devant lui les 8 dés
+                        ou chacun des 6 symboles des dés, son tour est terminé.<br>
+                        <u class="is-size-6">option 2 :</u><br>
+                        Si, parmi les dés conservés, figure au moins un ver et si la somme obtenue correspond à la valeur d'un Pickomino visible, 
+                        alors le joueur peut prendre ce Pickomino parmi la brochette de vers ou
+                        à un adversaire.
+                        Pour récupérer un Pickomino appartenant à un autre joueur, il faut que le résultat
+                        obtenu corresponde exactement au Pickomino.
+                        Si le Pickomino concerné se trouve déjà devant lui ou s’il n’est pas visible, le joueur
+                        prend alors parmi « la brochette », un Pickomino de valeur inférieure, si c’est
+                        possible.
+                        Si le joueur ne remarque pas que le Pickomino concerné se trouve devant un joueur, c’est tant pis pour lui !
+                    </p><br>
+
+                    <p>
+                        <span class="is-size-5 is-uppercase">«becqueter» un pickomino et l'empiler</span><br>
+                        Chaque nouveau Pickomino récupéré est empilé sur le Pickomino précédent, formant ainsi
+                        une pile. Chaque joueur n'a donc qu'un seul Pickomino visible devant lui. Les
+                        Pickomino cachés ne peuvent être récupérés, ils sont
+                        protégés.
+                    </p><br>
+
+                    <p>
+                        <span class="is-size-5 is-uppercase">tour de jeu raté</span><br>
+                        Un tour de jeu est raté dans les 3 cas suivants :<br><br>
+                        <ul>
+                            <li>
+                                • lorsqu'un joueur lance les dés et n'obtient que des symboles qui est déjà placé
+                                devant lui. Il ne peut plus effectuer d'autres jets de dés et passe
+                                son tour.
+                            </li><br>
+                            <li>
+                                • Lorsqu’ un joueur n’obtient aucun ver parmi les dés qu’il a jeté, il
+                                passe son tour.
+                            </li><br>
+                            <li>
+                                • Lorsque la somme obtenue par un joueur ne suffit pas pour récupérer un
+                                Pickomino, il passe son tour.
+                            </li>
+                        </ul><br>
+                        Lorsqu'un joueur passe son tour, il doit rendre le dernier Pickomino visible qu’il
+                        possède (s’il en possède au moins un).
+                        C'est alors au joueur suivant de jouer.
+                    </p><br>
+
+                    <p>
+                        <span class="is-size-5 is-uppercase">rendre un pickomino</span><br>
+                        Un Pickomino rendu est replacé face visible dans la brochette.
+                        De plus, le joueur retourne dans la brochette, le Pickomino qui a la plus forte valeur. Ce
+                        Pickomino ne peut plus être récupéré et reste face cachée jusqu'à la fin du jeu. 
+                        Si le Pickomino rendu est celui qui a la plus forte valeur, il reste face
+                        visible.
+                    </p><br>
+
+                    <p>
+                        <span class="is-size-5 is-uppercase">fin du jeu et décompte des points</span><br>
+                        Le jeu prend fin lorsque le dernier Pickomino est retiré.
+                        Chaque joueur compte alors les vers qu’il a « becqueté ». Le joueur qui possède
+                        le plus de vers est vainqueur.
+                        En cas d'égalité, le joueur qui a obtenu le Pickomino de plus
+                        grande valeur l’emporte.
+                    </p>
+
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}

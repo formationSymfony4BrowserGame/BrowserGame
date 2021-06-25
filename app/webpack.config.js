@@ -27,6 +27,7 @@ Encore
 
   .addStyleEntry('Bulma', './assets/styles/bulma.scss')
   .addStyleEntry('Styles', './assets/styles/styles.scss')
+  .addEntry('404', './assets/img/404.png')
 
   // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
   .enableStimulusBridge('./assets/controllers.json')
