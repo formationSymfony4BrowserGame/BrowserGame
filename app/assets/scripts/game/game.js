@@ -2,6 +2,7 @@ import { render } from './game/render'
 
 const data = {
   currentPlayer: 0,
+  playerCount: 0,
   hand: [],
   remainingDices: [],
   skewer: [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36],
@@ -30,6 +31,7 @@ const start = (players) => {
   for (let i = 0; i < 8; i++) {
     data.remainingDices.push(random(1, 6))
   }
+  data.playerCount = data.players.length
 
   console.log(data)
   render(data)
@@ -39,10 +41,11 @@ const load = (game) => {
   data.hand = game.hand
   data.remainingDices = game.remainingDices
   data.players = game.players
+  data.playerCount = game.playerCount
   // currentPlayer contain the index of the player in the data.player array while currentPlayerId contains the id value of the player from the database
   // so we use findIndex to get the index of the player with it's id equals to currentPlayerId
   data.currentPlayer = data.players.findIndex(player => player.id === game.currentPlayerId)
-  const nextSate = game.gameState
+  // const nextSate = game.gameState
   // we remove from the default skewer each pickominos owned by each players
   data.players.forEach(player => {
     player.pickominos.forEach(pickomino => {
