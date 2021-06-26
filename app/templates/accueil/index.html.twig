@@ -4,7 +4,11 @@
 
 {% block body %}
     <main class="container">
-
+        <section class="section has-text-centered">
+        {% if messageCompte is defined %}
+            <a href="{{ path('app_login') }}" class="has-text-danger"><h3>{{messageCompte}}</h3></a>
+        {% endif %}
+        </section>
         {# game presentation #}
         <section class="section">
             <p class="is-size-3 is-uppercase">Pickomino</p>
