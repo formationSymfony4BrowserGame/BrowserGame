@@ -16,15 +16,17 @@ class ResetFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('password', RepeatedType::class, [
-            'type' => PasswordType::class,
-            'invalid_message' => 'Les deux mots de passe doivent correspondre.',
-            'required' => true,
-            /*'first_options'=> array('constraints' => array(
-                new NotBlank(['message' => 'Les champs ne doivent être vides']),
-                new Length(['min' => 6,'minMessage' => 'Votre mot de passe doit faire minimum {{ limit }} caractères','max' => 4096]),
-            )),*/
-        ]);
+        $builder
+            ->add('password', RepeatedType::class, [
+                'type' => PasswordType::class,
+                'invalid_message' => 'Les deux mots de passe doivent correspondre.',
+                'required' => true
+                /*'first_options'=> array('constraints' => array(
+                    new NotBlank(['message' => 'Les champs ne doivent être vides']),
+                    new Length(['min' => 6,'minMessage' => 'Votre mot de passe doit faire minimum {{ limit }} caractères','max' => 4096]),
+                )),*/
+            ])
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
