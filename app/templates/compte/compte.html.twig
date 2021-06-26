@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CompteController!{% endblock %}
+{% block title %} - Compte utilisateur{% endblock %}
 
 {% block body %}
     <main class="container">
@@ -15,27 +15,39 @@
                     </li>
                 </ul>
             </div>
+            
+            {# Paramètres du compte #}
             {% if route_name == 'compte_parameters' %}
             <div class="has-text-centered"> 
                 <p class="is-size-4"><i data-feather="edit-3"></i> &nbsp; Modifier votre mot de passe</p>
+
+                {# La modification du mot de passe est faite avec succès#}
                 {% if success is defined %}
                 <div class="columns has-background-success mt-3 has-text-white has-text-weight-bold p-2">
                     <h3>{{success}}</h3>
                 </div>
                 {% endif %}
+
+                {# Le formulaire pour changer la mot de passe #}
                 {{form_start(form)}}
+
+                {# Les deux champs ne sont pas identiques #}
                 {% if form_errors(form.password.first) is not empty %}
                 <div class="columns has-background-danger mt-3 has-text-white has-text-weight-bold p-2">
                     <h3>{{form_errors(form.password.first)}}</h3>
                 </div>
                 {% endif %}
+
                 <div class="column is-one-third is-offset-4 mt-3">
                     <div class="field">
                         <div class="control">
+
+                            {# Personaliser le premier champ #}
                             {{form_label(form.password.first, 'Nouveau mot de passe', { 'label_attr': {'class': 'label'} }) }}
                             {{form_widget(form.password.first, {'attr': {'class': 'form-control input'}}) }}
                         </div>
                         <div class="control">
+                            {# Personaliser le deuxième champ #}
                             {{form_label(form.password.second, 'Confirmer le nouveau mot de passe', { 'label_attr': {'class': 'label'} }) }}
                             {{form_widget(form.password.second, {'attr': {'class': 'form-control input'}}) }}
                         </div>
@@ -47,7 +59,9 @@
             <div class="has-text-centered mt-5"> 
                 <a class="has-text-danger is-size-4"><i data-feather="alert-circle"></i> &nbsp; Supprimer votre compte</a>
             </div>
-            {% endif %}   
+            {% endif %}  
+
+            {# Historique des Parties #}
             {% if route_name == 'compte_histories' %}
             <div class="has-text-centered">
                 {% if histories is empty %}

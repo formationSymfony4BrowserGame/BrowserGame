@@ -39,7 +39,7 @@ class RegistrationFormType extends AbstractType
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Votre message doit faire minimum {{ limit }} caractères',
+                        'minMessage' => 'Votre mot de passe doit faire minimum {{ limit }} caractères',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),

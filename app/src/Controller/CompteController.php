@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 
+
 /**
  * @Route("/compte", name="compte_")
  */
@@ -29,20 +30,23 @@ class CompteController extends AbstractController
             ]);                
         }else {
             $em = $this->getDoctrine()->getManager();
+
+            //Creation du Formulaire
             $form = $this->createForm(ResetFormType::class, $user);
-            $form->handleRequest($request);        
+            $form->handleRequest($request); 
 
+            // Si le formulaire est envoyé et il est valide
             if ($form->isSubmitted() && $form->isValid()){
-
                 $hash = $encoder->encodePassword($user, $form->get('password')->getData());
+                // Inialisation du mot de passe
                 $user ->setPassword($hash);
                 $user = $form->getData();
                 $em->persist($user);
                 $em->flush();
-                $success = 'Votre mot de passe a été modifié avec succès';
+
                 return $this->render('compte/compte.html.twig', [
                     'form' => $form->createView(),
-                    'success' => $success,
+                    'success' => 'Votre mot de passe a été modifié avec succès',
                 ]);
             };
             return $this->render('compte/compte.html.twig', [
