@@ -42,10 +42,12 @@ class CompteController extends AbstractController
             return $this->render('compte/compte.html.twig', [
                 'form' => $form->createView(),
                 'success' => 'Votre mot de passe a été modifié avec succès',
+                'user'   => $user,
             ]);
         };
         return $this->render('compte/compte.html.twig', [
             'form' => $form->createView(),
+            'user'   => $user,
         ]);
     }
 

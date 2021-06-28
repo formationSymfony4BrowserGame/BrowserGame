@@ -51,12 +51,27 @@
                             {{form_widget(form.password.second, {'attr': {'class': 'form-control input'}}) }}
                         </div>
                     </div>
-                    <center><button class="button is-danger mt-3" type="submit">Modifier</button></center>
+                    <center><button class="button is-primary mt-3" type="submit">Modifier</button></center>
                 </div>
                 {{form_end(form)}}
             </div>
-            <div class="has-text-centered mt-5"> 
-                <a class="has-text-danger is-size-4"><i data-feather="alert-circle"></i> &nbsp; Supprimer votre compte</a>
+            <div class="has-text-centered mt-6"> 
+                <button class="button is-danger" id="button">Supprimer votre compte</button>
+                <div class="modal" id="page-modal">
+                    <div class="modal-background"></div>
+                    <div class="modal-content">
+                        <div class="section modal-wrap" >
+                            <div class="column has-text-centered">
+                                <p>Si vous cliquez sur continuer, vous allez supprimer votre compte utilisateur.</p>
+                                <form method="post" action="{{ path('delete_delete', {'id': user.id}) }}" onsubmit="return confirm('Êtes-vous sûr de bien vouloir supprimer votre compte?');">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+                                    <button class="button is-danger mt-3">Continuer</button>
+                                </form>
+                                <button class="button is-success mt-5" id="close">Annuler</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             {% endif %}  
 

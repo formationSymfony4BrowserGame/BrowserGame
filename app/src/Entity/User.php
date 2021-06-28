@@ -50,12 +50,12 @@ class User implements UserInterface
     private $role = [];
 
     /**
-     * @ORM\OneToMany(targetEntity=Game::class, mappedBy="User")
+     * @ORM\OneToMany(targetEntity=Game::class, mappedBy="User", cascade={"remove"})
      */
     private $games;
 
     /**
-     * @ORM\OneToMany(targetEntity=History::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=History::class, mappedBy="user", cascade={"remove"})
      */
     private $histories;
 

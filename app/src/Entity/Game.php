@@ -57,7 +57,7 @@ class Game
     private $User;
 
     /**
-     * @ORM\OneToMany(targetEntity=Player::class, mappedBy="game")
+     * @ORM\OneToMany(targetEntity=Player::class, mappedBy="game", cascade={"remove"})
      */
     private $players;
 
