@@ -1,4 +1,5 @@
 import htmlToElement from 'html-to-element'
+import {throwDices} from './state/beginingState'
 
 // main render function
 export const render = (data) => {
@@ -8,6 +9,12 @@ export const render = (data) => {
       updateRemainingDices(data)
       updateHand(data)
       updatePlayersScore(data)
+      break
+    case 'beginingState':
+      // Colorer le nom du joueur en cours
+      colorCurrentPlayerName(data)
+      // Activer le bouton "lancer"
+      setDisableButton(false, data)
   }
 }
 
@@ -56,7 +63,7 @@ const updatePlayersScore = (data) => {
   })
 }
 
-const updateRemainingDices = (data) => {
+export const updateRemainingDices = (data) => {
   const remainingDices = document.getElementById('remaining-dices')
   remainingDices.innerHTML = ''
   for (let i = 0; i < 8; i++) {
@@ -79,5 +86,25 @@ const updateHand = (data) => {
     } else {
       hand.appendChild(emptyDiceElement())
     }
+  }
+}
+
+const colorCurrentPlayerName = (data) => {
+  // récuperer l'objet du DOM
+  const currentPlayerName = document.getElementById(data.currentPlayer + '-name')
+  // ajouter la class de Bulma pour changer la couleur
+  Array.from(currentPlayerName.children).forEach((child) => child.classList.add('has-text-info') )
+}
+
+const setDisableButton = (value, data) => {
+  // récuperer l'objet du DOM
+  const throwButton = document.getElementById('button')
+  // activer ou désactiver le boutton
+  if (value) {
+    throwButton.setAttribute('disabled', String(value))
+    throwButton.onclick = null
+  } else {
+    throwButton.removeAttribute('disabled')
+    throwButton.onclick = () => throwDices(data)
   }
 }
