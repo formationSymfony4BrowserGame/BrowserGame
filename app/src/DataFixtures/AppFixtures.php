@@ -65,15 +65,15 @@ class AppFixtures extends Fixture
                 // Le premier joueur qui est l'utilisateur connecté
                 if($j === 1){
                     $player->setPseudo($currentUser);
-                    $player->setRanking(1);
+                    $player->setRanking(0);
                     $player->setPickominos([32,33]);
                     $player->setGame($game);
                     
                 // Les 3 autres joueurs
                 }else{
                     $player->setPseudo('pseudo' .$i.$j);
-                    $player->setRanking($j);
-                    $player->setPickominos([2 .$j]);
+                    $player->setRanking($j-1);
+                    $player->setPickominos([(int)(2 .$j)]);
                     $player->setGame($game);
                 } 
 
