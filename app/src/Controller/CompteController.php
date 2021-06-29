@@ -23,27 +23,38 @@ class CompteController extends AbstractController
      */
     public function index(Request $request, UserPasswordEncoderInterface $encoder): Response
     {
-        $user = $this->getuser();
-        $em = $this->getDoctrine()->getManager();
-
         //Creation du Formulaire
+        $user = $this->getuser();
         $form = $this->createForm(ResetFormType::class, $user);
-        $form->handleRequest($request); 
+        $form->handleRequest($request);
 
         // Si le formulaire est envoyé et il est valide
         if ($form->isSubmitted() && $form->isValid()){
-            $hash = $encoder->encodePassword($user, $form->get('password')->getData());
-            // Inialisation du mot de passe
-            $user ->setPassword($hash);
-            $user = $form->getData();
-            $em->persist($user);
-            $em->flush();
-
-            return $this->render('compte/compte.html.twig', [
-                'form' => $form->createView(),
-                'success' => 'Votre mot de passe a été modifié avec succès',
-                'user'   => $user,
-            ]);
+            $currentPassword = $form->get('currentPasswordField')->getData(); 
+            
+        // Si le mot de passe actuel est valide
+            if ( $encoder->isPasswordValid($user, $currentPassword) ) {
+                $hashNewPassword = $encoder->encodePassword($user, $form->get('password')->getData());
+                // Inialisation du mot de passe
+                $user ->setPassword($hashNewPassword);
+                $user = $form->getData();
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($user);
+                $em->flush();  
+                return $this->render('compte/compte.html.twig', [
+                    'form' => $form->createView(),
+                    'success' => 'Votre mot de passe a été modifié avec succès',
+                    'user'   => $user,
+                ]);
+      
+            }else{
+                $currentPasswordMessage = "Le mot de passe actuel est incorrecte.";
+                return $this->render('compte/compte.html.twig', [
+                    'form' => $form->createView(),
+                    'user'   => $user,
+                    'currentPasswordMessage' => $currentPasswordMessage,
+                ]);    
+            }
         };
         return $this->render('compte/compte.html.twig', [
             'form' => $form->createView(),
