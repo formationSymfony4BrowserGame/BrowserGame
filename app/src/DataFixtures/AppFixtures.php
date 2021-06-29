@@ -56,7 +56,7 @@ class AppFixtures extends Fixture
             $game->setCurrentPlayerId(0);
             $game->setHand([1,2,3]);
             $game->setRemainingDices([4,5,6,7,8]);
-            $game->setGameState("Dice");
+            $game->setGameState('beginingState');
             $manager->persist($game);
 
             //Création des 4 joueurs qui participent au même jeu sauvgardé
