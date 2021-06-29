@@ -1,5 +1,6 @@
 import htmlToElement from 'html-to-element'
 import { throwDices } from './state/beginingState'
+import { getChoosableValues, chooseValue } from './state/afterThrowState'
 
 // main render function
 const render = (data) => {
@@ -15,6 +16,16 @@ const render = (data) => {
       colorCurrentPlayerName(data)
       // Activer le bouton "lancer"
       setDisableButton(false, data)
+      break
+    case 'afterThrowState':
+      // cleanup from previous state
+      setDisableButton(true, data)
+      // add buttons for each choosable values
+      setChoosableValuesButtons(false, data)
+      break
+    case 'beforeThrowState':
+      // cleanup from previous state
+      setChoosableValuesButtons(true, data)
   }
 }
 export default render
@@ -28,16 +39,19 @@ const pickominoElement = (pickomino) => htmlToElement(`
 `)
 const emptyPickominoElement = () => htmlToElement('<div class="pickomino column"></div>')
 
-const diceElement = (value) => {
-  const dice = htmlToElement(`
-    <div class="column dice">
-      <span class="value">${value === 6 ? 'ver' : value}</span>
-    </div>
-  `)
-  return dice
-}
+const diceElement = (value) => htmlToElement(`
+  <div class="column dice">
+    <span class="value">${value === 6 ? 'ver' : value}</span>
+  </div>
+`)
 
 const emptyDiceElement = () => htmlToElement('<div class="column dice empty"></div>')
+
+const choosableValueButton = (value) => htmlToElement(`
+  <button class="column button is-outlined is-primary mx-6">
+    ${value === 6 ? 'ver' : value}
+  </button>
+`)
 
 // fuctions used for render
 const updateSkewer = (data) => {
@@ -77,7 +91,7 @@ export const updateRemainingDices = (data) => {
   }
 }
 
-const updateHand = (data) => {
+export const updateHand = (data) => {
   const hand = document.getElementById('hand')
   hand.innerHTML = ''
   for (let i = 0; i < 8; i++) {
@@ -107,5 +121,24 @@ const setDisableButton = (value, data) => {
   } else {
     throwButton.removeAttribute('disabled')
     throwButton.onclick = () => throwDices(data)
+  }
+}
+
+// set the content of the Choosable Values Buttons container
+// if remove is true, it set the content as '' else it set it as a list of collection of buttons
+const setChoosableValuesButtons = (remove, data) => {
+  // fetch the DOM element of the buttons Container
+  const container = document.getElementById('choosable-values-buttons')
+
+  if (remove) {
+    // empty the container
+    container.innerHTML = ''
+  } else {
+    // for each choosable value create a button Element and add it to the container childrens
+    getChoosableValues(data).forEach((value) => {
+      const button = choosableValueButton(value)
+      button.onclick = () => chooseValue(value, data)
+      container.appendChild(button)
+    })
   }
 }
