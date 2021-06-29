@@ -1,8 +1,8 @@
 import htmlToElement from 'html-to-element'
-import {throwDices} from './state/beginingState'
+import { throwDices } from './state/beginingState'
 
 // main render function
-export const render = (data) => {
+const render = (data) => {
   switch (data.state) {
     case 'loading':
       updateSkewer(data)
@@ -17,6 +17,7 @@ export const render = (data) => {
       setDisableButton(false, data)
   }
 }
+export default render
 
 // html element definition
 const pickominoElement = (pickomino) => htmlToElement(`
@@ -93,7 +94,7 @@ const colorCurrentPlayerName = (data) => {
   // récuperer l'objet du DOM
   const currentPlayerName = document.getElementById(data.currentPlayer + '-name')
   // ajouter la class de Bulma pour changer la couleur
-  Array.from(currentPlayerName.children).forEach((child) => child.classList.add('has-text-info') )
+  Array.from(currentPlayerName.children).forEach((child) => child.classList.add('has-text-info'))
 }
 
 const setDisableButton = (value, data) => {
