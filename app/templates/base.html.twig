@@ -18,14 +18,12 @@
     <meta name='theme-color' content='#ffffff'>
 
     {# Stylesheets: assets/styles/Bulma.scss and assets/styles/Style.scss #}
-    {% block stylesheets %}
-        {{ encore_entry_link_tags('Bulma') }}
-        {{ encore_entry_link_tags('Styles') }}
-    {% endblock %}
+    {{ encore_entry_link_tags('Bulma') }}
+    {{ encore_entry_link_tags('Styles') }}
+    {% block stylesheets %}{% endblock %}
     {# Javascript: assets/app.js #}
-    {% block javascripts %}
-        {{ encore_entry_script_tags('app') }}
-    {% endblock %}
+    {{ encore_entry_script_tags('app') }}
+    {% block javascripts %}{% endblock %}
 </head>
 
 <body>
