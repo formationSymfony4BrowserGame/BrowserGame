@@ -1,4 +1,5 @@
-import { render } from './game/render'
+import { render } from './render'
+import { beginingState } from './state/beginingState'
 
 const data = {
   currentPlayer: 0,
@@ -34,6 +35,7 @@ const start = (players) => {
   data.playerCount = data.players.length
 
   render(data)
+  beginingState(data)
 }
 
 const load = (game) => {
