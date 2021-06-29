@@ -24,6 +24,7 @@ Encore
   .addEntry('new', './assets/scripts/game/new.js')
   .addEntry('load', './assets/scripts/game/load.js')
   .addEntry('game', './assets/scripts/game/game.js')
+  .addEntry('modal', './assets/scripts/modal.js')
 
   .addStyleEntry('Bulma', './assets/styles/bulma.scss')
   .addStyleEntry('Styles', './assets/styles/styles.scss')

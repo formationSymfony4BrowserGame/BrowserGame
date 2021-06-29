@@ -8,7 +8,6 @@
 // start the Stimulus application
 import './bootstrap'
 import './burger'
-import './modal'
 
 const feather = require('feather-icons')
 
