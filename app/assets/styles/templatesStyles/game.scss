@@ -68,11 +68,24 @@ $player-height: calc((#{$content-height} - 3rem - 1.5rem) / 4);
     }
   
     .throw {
-      height: $row-height;
+      height: calc(#{$row-height} / 2);
       align-items: flex-start;
       padding-top: 2rem;
       .button {
         transform: translateY(25%);
+      }
+    }
+
+    #choosable-values-buttons {
+      height: calc(#{$row-height} / 2);
+      align-items: center;
+      justify-content: center;
+      padding-top: 2rem;
+      button {
+        $button-size: 4rem;
+        height: $button-size;
+        width: $button-size;
+        flex: 0 0 $button-size;
       }
     }
 
