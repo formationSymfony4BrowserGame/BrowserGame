@@ -21,9 +21,10 @@
     {{ encore_entry_link_tags('Bulma') }}
     {{ encore_entry_link_tags('Styles') }}
     {% block stylesheets %}{% endblock %}
+
+    {% block javascripts %}{% endblock %}
     {# Javascript: assets/app.js #}
     {{ encore_entry_script_tags('app') }}
-    {% block javascripts %}{% endblock %}
 </head>
 
 <body>
