@@ -8,6 +8,7 @@
 // start the Stimulus application
 import './bootstrap'
 import './burger'
+
 const feather = require('feather-icons')
 
 feather.replace()

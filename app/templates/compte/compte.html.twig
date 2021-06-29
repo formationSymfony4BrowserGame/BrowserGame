@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} - Compte utilisateur{% endblock %}
+
+{% block javascripts %}
+  {{ encore_entry_script_tags("modal") }}
+{% endblock %}
+
+
+{% block body %}
+    <main class="container">
+        <section class="section">
+            <div class="tabs is-centered is-large">
+                <ul>
+                    <li class="{% if route_name == 'compte_parameters' %}is-active{% endif %}">
+                        <a href="{{ path('compte_parameters') }}"> <i data-feather="settings"></i> &nbsp; Paramètres</a>
+                    </li>
+                    <li class="{% if route_name == 'compte_histories' %}is-active{% endif %}">
+                        <a href="{{ path('compte_histories') }}"> <i class="has-text-primary" data-feather="archive"></i> &nbsp; Historique des parties</a>
+                    </li>
+                </ul>
+            </div>
+            
+            {# Paramètres du compte #}
+            {% if route_name == 'compte_parameters' %}
+            <div class="has-text-centered"> 
+                <p class="is-size-4"><i data-feather="edit-3"></i> &nbsp; Modifier votre mot de passe</p>
+
+                {# La modification du mot de passe est faite avec succès#}
+                {% if success is defined %}
+                <div class="columns has-background-success mt-3 has-text-white has-text-weight-bold p-2">
+                    <h3>{{success}}</h3>
+                </div>
+                {% endif %}
+
+                {# Le formulaire pour changer la mot de passe #}
+                {{form_start(form)}}
+
+                {# Les deux champs ne sont pas identiques #}
+                {% if form_errors(form.password.first) is not empty %}
+                <div class="columns has-background-danger mt-3 has-text-white has-text-weight-bold p-2">
+                    <h3>{{form_errors(form.password.first)}}</h3>
+                </div>
+                {% endif %}
+
+                <div class="column is-one-third is-offset-4 mt-3">
+                    <div class="field">
+                        <div class="control">
+                            {# Personaliser le premier champ #}
+                            {{form_label(form.password.first, 'Nouveau mot de passe', { 'label_attr': {'class': 'label'} }) }}
+                            {{form_widget(form.password.first, {'attr': {'class': 'form-control input'}}) }}
+                        </div>
+                        <div class="control">
+                            {# Personaliser le deuxième champ #}
+                            {{form_label(form.password.second, 'Confirmer le nouveau mot de passe', { 'label_attr': {'class': 'label'} }) }}
+                            {{form_widget(form.password.second, {'attr': {'class': 'form-control input'}}) }}
+                        </div>
+                    </div>
+                    <center><button class="button is-primary mt-3" type="submit">Modifier</button></center>
+                </div>
+                {{form_end(form)}}
+            </div>
+            <div class="has-text-centered mt-6"> 
+                <button class="button is-danger" id="button">Supprimer votre compte</button>
+                <div class="modal" id="page-modal">
+                    <div class="modal-background"></div>
+                    <div class="modal-content">
+                        <div class="section modal-wrap" >
+                            <div class="column has-text-centered">
+                                <p>Si vous cliquez sur continuer, vous allez supprimer votre compte utilisateur.</p>
+                                <form method="post" action="{{ path('delete_delete', {'id': user.id}) }}" onsubmit="return confirm('Êtes-vous sûr de bien vouloir supprimer votre compte?');">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+                                    <button class="button is-danger mt-3">Continuer</button>
+                                </form>
+                                <button class="button is-success mt-5" id="close">Annuler</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}  
+
+            {# Historique des Parties #}
+            {% if route_name == 'compte_histories' %}
+            <div class="has-text-centered">
+                {% if histories is empty %}
+                <h3>Votre historique est vide pour le moment</h3>
+                {% else %}
+                <ul>
+                    {% for history in histories %}
+                        <li><h4> Partie du {{ history.date|date("d/m/Y") }} </h4></li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            {% endif %}
+        </section>
+    </main>
+{% endblock %}
