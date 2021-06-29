@@ -20,7 +20,7 @@
         {% for ranking, playerName in players %}
             <div class="player" id="{{ ranking }}">
                 <div class="">
-                    <div class="player-name">
+                    <div class="player-name" id="{{ ranking }}-name">
                         <span class="icon">
                             <i class="has-text-primary" data-feather="user"></i>
                         </span>
@@ -73,7 +73,7 @@
                     <div class="column dice empty"></div>
                 </div>
             </div>
-            <button class="column button is-1 is-offset-1 is-primary throw-button" disabled>Lancer</button>
+            <button class="column button is-1 is-offset-1 is-primary throw-button" id="button" disabled>Lancer</button>
         </div>
         {# current player hand #}
         <div class="columns hand m-0">
