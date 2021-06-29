@@ -1,4 +1,5 @@
-import { updateRemainingDices, render } from '../render'
+import render, { updateRemainingDices } from '../render'
+import afterThrowState from './afterThrowState'
 
 // Fonction lancé de dé
 export const throwDices = (data) => {
@@ -6,10 +7,13 @@ export const throwDices = (data) => {
     () => Math.floor(Math.random() * 6) + 1
   )
   updateRemainingDices(data)
+  afterThrowState(data)
 }
 
 // Fonction début de tour
-export const beginingState = (data) => {
-  data.state = 'beginingState' 
+const beginingState = (data) => {
+  data.state = 'beginingState'
   render(data)
 }
+
+export default beginingState

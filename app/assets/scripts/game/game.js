@@ -1,5 +1,9 @@
-import { render } from './render'
-import { beginingState } from './state/beginingState'
+import render from './render'
+import beginingState from './state/beginingState'
+import afterThrowState from './state/afterThrowState'
+import beforeThrowState from './state/beforeThrowState'
+import pickominoState from './state/pickominoState'
+import turnEndState from './state/turnEndState'
 
 const data = {
   currentPlayer: 0,
@@ -56,6 +60,24 @@ const load = (game) => {
     })
   })
   render(data)
+
+  switch (game.gameState) {
+    case 'beginingState':
+      beginingState(data)
+      break
+    case 'afterThrowState':
+      afterThrowState(data)
+      break
+    case 'beforeThrowState':
+      beforeThrowState(data)
+      break
+    case 'pickominoState':
+      pickominoState(data)
+      break
+    case 'turnEndState':
+      turnEndState(data)
+      break
+  }
 }
 
 // allow them to be called from outside webpacked assets
