@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} - E-mail envoyé{% endblock %}
+
+{% block body %}
+<main class="container">
+    <section class="section has-text-centered">
+            <p class="is-size-4">
+            S'il existe un compte correspondant à votre adresse mail, un e-mail vient d'être envoyé contenant un lien. Vous pouvez utiliser ce lien pour réinitialiser votre mot de passe.        
+            Ce lien expirera dans une heure.
+            </p>
+            <p class="is-size-4" >Si vous ne recevez pas d'e-mail, veuillez vérifier le spam ou <a class="has-text-weight-semibold has-text-info" href="{{ path('app_forgot_password_request') }}">réessayer</a>.</p>
+    </section>
+</main>    
+{% endblock %}

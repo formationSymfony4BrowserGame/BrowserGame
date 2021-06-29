@@ -36,6 +36,13 @@
                 {# Le formulaire pour changer la mot de passe #}
                 {{form_start(form)}}
 
+                {# Si le mot de passe du user est incorrect #}
+                {% if currentPasswordMessage is defined %}
+                <div class="columns has-background-danger mt-3 has-text-white has-text-weight-bold p-2">
+                    <h3>{{ currentPasswordMessage }}</h3>
+                </div>
+                {% endif %}
+
                 {# Les deux champs ne sont pas identiques #}
                 {% if form_errors(form.password.first) is not empty %}
                 <div class="columns has-background-danger mt-3 has-text-white has-text-weight-bold p-2">
@@ -45,6 +52,11 @@
 
                 <div class="column is-one-third is-offset-4 mt-3">
                     <div class="field">
+                        <div class="control">
+                            {# Personaliser le champ mot de passe actuelle #}
+                            {{form_label(form.currentPasswordField, 'Mot de passe actuelle', { 'label_attr': {'class': 'label'} }) }}
+                            {{form_widget(form.currentPasswordField, {'attr': {'class': 'form-control input'}}) }}
+                        </div>
                         <div class="control">
                             {# Personaliser le premier champ #}
                             {{form_label(form.password.first, 'Nouveau mot de passe', { 'label_attr': {'class': 'label'} }) }}
