@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} - Réinitialisation du mot de passe{% endblock %}
+
+{% block body %}
+<main class="container">
+    <section class="section">
+        <div class="has-text-centered"> 
+           {# {% for flashError in app.flashes('reset_password_error') %}
+                <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+            {% endfor %}#}
+
+            <p class="is-size-4">Créez un nouveau mot de passe - Etape 2</p>
+
+            {% if form_errors(resetForm.plainPassword.first) is not empty %}
+                <div class="columns has-background-danger mt-3 has-text-white has-text-weight-bold p-2">
+                    <h3>{{form_errors(resetForm.plainPassword.first)}}</h3>
+                </div>
+            {% endif %}
+
+            {{form_start(resetForm)}}
+            <div class="column is-one-third is-offset-4 mt-3">
+
+                <div class="field">
+                    <div class="control">
+                        {{form_label(resetForm.plainPassword.first, 'Entrez votre nouveau mot de passe', { 'label_attr': {'class': 'label'} }) }}
+                        {{form_widget(resetForm.plainPassword.first, {'attr': {'class': 'form-control input'}}) }}
+                    </div>
+                    <div class="control">
+                        {{form_label(resetForm.plainPassword.second, 'Confirmez le nouveau mot de passe', { 'label_attr': {'class': 'label'} }) }}
+                        {{form_widget(resetForm.plainPassword.second, {'attr': {'class': 'form-control input'}}) }}
+                    </div>
+                </div>
+                <center><button class="button is-primary mt-3" type="submit">Réinitialiser le mot de passe</button></center>
+            </div>
+            {{form_end(resetForm)}}
+        </div>
+    </section>
+</main>            
+{% endblock %}

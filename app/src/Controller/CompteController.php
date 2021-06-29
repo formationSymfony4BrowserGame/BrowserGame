@@ -30,11 +30,15 @@ class CompteController extends AbstractController
 
         // Si le formulaire est envoyé et il est valide
         if ($form->isSubmitted() && $form->isValid()){
+
+            //récupérer le mot de passe actuel du formulaire
             $currentPassword = $form->get('currentPasswordField')->getData(); 
-            
+
         // Si le mot de passe actuel est valide
             if ( $encoder->isPasswordValid($user, $currentPassword) ) {
+                //récupérer et encoder le nouveau mot de passe
                 $hashNewPassword = $encoder->encodePassword($user, $form->get('password')->getData());
+
                 // Inialisation du mot de passe
                 $user ->setPassword($hashNewPassword);
                 $user = $form->getData();
@@ -48,6 +52,7 @@ class CompteController extends AbstractController
                 ]);
       
             }else{
+            // Si le mot de passe actuel est invalide    
                 $currentPasswordMessage = "Le mot de passe actuel est incorrecte.";
                 return $this->render('compte/compte.html.twig', [
                     'form' => $form->createView(),
