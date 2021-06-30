@@ -19,6 +19,7 @@ const render = (data) => {
       enableThrowButton(true, data)
       break
     case 'afterThrowState':
+      setEndTurnButton(false, data)
       // add buttons for each choosable values
       setChoosableValuesButtons(true, data)
       break
