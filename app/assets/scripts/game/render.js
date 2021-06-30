@@ -2,6 +2,7 @@ import htmlToElement from 'html-to-element'
 import { throwDices } from './state/beginingState'
 import { getChoosableValues, chooseValue } from './state/afterThrowState'
 import { endTurn } from './state/beforeThrowState'
+import { getChoosablePickomino, getStealablePlayer, chooseSkewerPickomino, stealPlayerPickomino } from './state/pickominoState'
 
 // main render function
 const render = (data) => {
@@ -11,6 +12,7 @@ const render = (data) => {
       updateRemainingDices(data)
       updateHand(data)
       updatePlayersScore(data)
+      colorCurrentPlayerName(data)
       break
     case 'beginingState':
       // Colorer le nom du joueur en cours
@@ -24,21 +26,25 @@ const render = (data) => {
       setChoosableValuesButtons(true, data)
       break
     case 'beforeThrowState':
-      // cleanup from previous state
-      setChoosableValuesButtons(false, data)
       if (data.remainingDices.length > 0) { // if there is dices left to throw
         // activate the throw button
         enableThrowButton(true, data)
         // show the endTurn button
         setEndTurnButton(true, data)
       }
+      break
+    case 'pickominoState':
+      // show and activate the choosable pickomino ( if any ) from the skewerPickomino
+      setChoosablePickomino(data)
+      // show and activate the stealable pickomino ( if any ) from the players
+      setStealablePickomino(data)
   }
 }
 export default render
 
 // html element definition
 const pickominoElement = (pickomino) => htmlToElement(`
-    <div class="pickomino column">
+    <div class="pickomino column" id="pickomino-${pickomino}">
       <p class="value">${pickomino}</p>
       <p class="worms">${Math.floor((pickomino - 21) / 4) + 1} vers</p>
     </div>
@@ -60,7 +66,7 @@ const choosableValueButton = (value) => htmlToElement(`
 `)
 
 // fuctions used for render
-const updateSkewer = (data) => {
+export const updateSkewer = (data) => {
   const skewer = document.getElementById('skewer')
   skewer.innerHTML = ''
   data.skewer.forEach(pickomino => {
@@ -68,7 +74,7 @@ const updateSkewer = (data) => {
   })
 }
 
-const updatePlayersScore = (data) => {
+export const updatePlayersScore = (data) => {
   data.players.forEach(player => {
     const playerScore = document.getElementById(player.ranking + '-score')
     let score = 0
@@ -167,5 +173,26 @@ const setEndTurnButton = (value, data) => {
   } else {
     endTurnButton.classList.remove('visible')
     endTurnButton.onclick = null
+  }
+}
+
+const setChoosablePickomino = (data) => {
+  // getting the choosable pickomino value
+  const choosablePickomino = getChoosablePickomino(data)
+  if (!isNaN(choosablePickomino) && choosablePickomino !== -1) {
+    // fetching the DOM Element of that pickomino
+    const choosablePickominoElement = document.getElementById('pickomino-' + choosablePickomino)
+    choosablePickominoElement.classList.add('choosable')
+    choosablePickominoElement.onclick = () => chooseSkewerPickomino(choosablePickomino, data)
+  }
+}
+
+const setStealablePickomino = (data) => {
+  // getting the stealable player
+  const stealablePlayerRanking = getStealablePlayer(data)
+  if (stealablePlayerRanking !== null) {
+    const stealablePickominoElement = document.getElementById(stealablePlayerRanking + '-score').children[1]
+    stealablePickominoElement.classList.add('choosable')
+    stealablePickominoElement.onclick = () => stealPlayerPickomino(stealablePlayerRanking, data)
   }
 }
