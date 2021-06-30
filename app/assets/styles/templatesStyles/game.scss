@@ -71,8 +71,17 @@ $player-height: calc((#{$content-height} - 3rem - 1.5rem) / 4);
       height: calc(#{$row-height} / 2);
       align-items: flex-start;
       padding-top: 2rem;
-      .button {
-        transform: translateY(25%);
+      .buttons {
+        .button {
+          width: 100%;
+          padding: 0;
+          &#end-turn-button {
+            display: none;
+            &.visible {
+              display: initial;
+            }
+          }
+        }
       }
     }
 
