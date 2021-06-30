@@ -73,7 +73,10 @@
                     <div class="column dice empty"></div>
                 </div>
             </div>
-            <button class="column button is-1 is-offset-1 is-primary throw-button" id="button" disabled>Lancer</button>
+            <div class="column is-1 is-offset-1 buttons">
+                <button class="button is-primary throw-button" id="button">Lancer</button>
+                <button class="button is-primary is-outlined" id="end-turn-button">Finir son tour</button>
+            </div>
         </div>
         <div class="columns m-0" id="choosable-values-buttons"></div>
         {# current player hand #}

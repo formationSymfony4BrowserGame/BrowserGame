@@ -78,6 +78,14 @@ class GameController extends AbstractController
      * @Route("/game/load/{id}/players", name="load_players")
      */
     public function loadPlayers(int $id): Response {
+        $user = $this->getuser();
+
+        if (empty($user)) {
+            return $this->render('accueil/index.html.twig', [
+                'message' => "Connectez-Vous pour pouvoir lancer le jeu",
+            ]);                
+        }
+
         $em = $this->getDoctrine()->getManager();
         $game= $em->getRepository(Game::class)->findOneBy([
             'id' => $id,
@@ -101,6 +109,14 @@ class GameController extends AbstractController
      */
     public function game(Request $request): Response
     {
+        $user = $this->getuser();
+
+        if (empty($user)) {
+            return $this->render('accueil/index.html.twig', [
+                'message' => "Connectez-Vous pour pouvoir lancer le jeu",
+            ]);                
+        }
+
         return $this->render('game/game.html.twig', [
             'players' => $request->request->all()
         ]);
@@ -111,6 +127,14 @@ class GameController extends AbstractController
      */
     public function loadedGame($id): Response
     {
+        $user = $this->getuser();
+
+        if (empty($user)) {
+            return $this->render('accueil/index.html.twig', [
+                'message' => "Connectez-Vous pour pouvoir lancer le jeu",
+            ]);                
+        }
+        
         $em = $this->getDoctrine()->getManager();
         $game= $em->getRepository(Game::class)->findOneBy([
             'id' => $id,

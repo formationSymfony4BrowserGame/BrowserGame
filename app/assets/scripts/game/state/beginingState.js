@@ -1,4 +1,4 @@
-import render, { updateRemainingDices } from '../render'
+import render, { updateRemainingDices, enableThrowButton } from '../render'
 import afterThrowState from './afterThrowState'
 
 // Fonction lancé de dé
@@ -7,6 +7,7 @@ export const throwDices = (data) => {
     () => Math.floor(Math.random() * 6) + 1
   )
   updateRemainingDices(data)
+  enableThrowButton(false, data)
   afterThrowState(data)
 }
 

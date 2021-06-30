@@ -1,6 +1,6 @@
 import render from '../render'
 
-const turnEndState = (data) => {
+const turnEndState = (isHandNull, data) => {
   data.state = 'turnEndState'
   render(data)
 }
