@@ -8,6 +8,11 @@
     <div class="buttons is-centered">
         <a href="{{ path('new_game') }}" class="button is-primary">Nouvelle partie</a>
         <a href="{{ path('load_game') }}" class="button is-primary" {% if games is empty %} disabled {% endif %} >Charger une partie</a>
+        <form method="POST" action="{{ path('delete_saved_game', {'id': game.id}) }}" onsubmit="return confirm('Supprimer ?')">
+            <input type="hidden" name="_method" value="DELETE">
+                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ game.id) }}">
+            <button class="">Supprimer</button>
+        </form>
     </div>
 </div>
 {% endblock %}
