@@ -61,7 +61,7 @@
                 {# Right part of the main menu #}
                 <div class='navbar-end'>
                     <div class='navbar-item'>
-                        <button class="button is-info mr-3" id="save_game">Sauvegarder la partie</button>    
+                        <a href="{{ path('accueil') }}" class="button is-info mr-3" id="save_game">Sauvegarder la partie</a>
                         <a href="{{ path('app_logout') }}" class="button is-primary">Se déconnecter</a>    
                         <span class="icon ml-5 is-medium has-background-white">
                             <a href="{{ path('compte_parameters') }}"><i class="has-text-primary" data-feather="user"></i></a>
@@ -71,7 +71,8 @@
             </div>
         </nav>
     </header>
-    {% block body %}{% endblock %}
+    {% block body %}
+    {% endblock %}
     {# Footer #}
     <footer class='footer'>
         <div class='content has-text-centered'>

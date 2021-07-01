@@ -1,22 +1,23 @@
 import axios from 'axios'
-/* import game from './game' */
 
 const save = document.getElementById('save_game')
 
-const Game = {
+const game = {
   playerCount: 3,
-  hand: ['ver', 'ver', 3, 3],
+  currentPlayer: 1,
+  hand: [4, 4, 3, 3],
   remainingDices: [21, 22, 23, 24],
-  skewer: [25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36],
-  state: 'loading',
-  players: ['pseudo1', 'pseudo2', 'pseudo4']
+  gameState: 'loading',
+  player0: ['pseudo1', 21, 22],
+  player1: ['pseudo2', 31, 33],
+  player2: ['pseudo3', 26, 25]
 }
 
-const handleSubmit = (x) => {
+const handleSubmit = (game) => {
   axios({
     method: 'post',
     url: '/save',
-    data: x,
+    data: game,
     transformRequest: [
       function (data, headers) {
         const serializedData = []
@@ -30,4 +31,4 @@ const handleSubmit = (x) => {
     ]
   })
 }
-save.onclick = () => handleSubmit(Game)
+save.onclick = () => handleSubmit(game)
