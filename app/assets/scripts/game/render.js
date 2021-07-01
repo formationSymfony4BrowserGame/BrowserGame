@@ -12,11 +12,11 @@ const render = (data) => {
       updateRemainingDices(data)
       updateHand(data)
       updatePlayersScore(data)
-      colorCurrentPlayerName(data)
+      colorCurrentPlayerName(true, data)
       break
     case 'beginingState':
       // Colorer le nom du joueur en cours
-      colorCurrentPlayerName(data)
+      colorCurrentPlayerName(true, data)
       // Activer le bouton "lancer"
       enableThrowButton(true, data)
       break
@@ -38,6 +38,15 @@ const render = (data) => {
       setChoosablePickomino(data)
       // show and activate the stealable pickomino ( if any ) from the players
       setStealablePickomino(data)
+      break
+    case 'turnEndState':
+      // update dices and pickominos
+      updateSkewer(data)
+      updateRemainingDices(data)
+      updateHand(data)
+      updatePlayersScore(data)
+      // uncolor current player name
+      colorCurrentPlayerName(false, data)
   }
 }
 export default render
@@ -120,11 +129,16 @@ export const updateHand = (data) => {
   handScore.innerHTML = score
 }
 
-const colorCurrentPlayerName = (data) => {
+const colorCurrentPlayerName = (value, data) => {
   // récuperer l'objet du DOM
   const currentPlayerName = document.getElementById(data.currentPlayer + '-name')
-  // ajouter la class de Bulma pour changer la couleur
-  Array.from(currentPlayerName.children).forEach((child) => child.classList.add('has-text-info'))
+  if (value) {
+    // ajouter la class de Bulma pour changer la couleur
+    Array.from(currentPlayerName.children).forEach((child) => child.classList.add('has-text-info'))
+  } else {
+    // remove bulma color class
+    Array.from(currentPlayerName.children).forEach((child) => child.classList.remove('has-text-info'))
+  }
 }
 
 // value dertermine if the button should be enabled or not (false = disabled, true = enabled)
