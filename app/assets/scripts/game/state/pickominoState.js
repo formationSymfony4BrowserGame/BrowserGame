@@ -51,6 +51,9 @@ export const stealPlayerPickomino = (playerRanking, data) => {
 const pickominoState = (data) => {
   data.state = 'pickominoState'
   render(data)
+  if (getChoosablePickomino(data) === -1 && getStealablePlayer(data) === null) {
+    turnEndState(false, data)
+  }
 }
 
 export default pickominoState
