@@ -52,6 +52,9 @@ $player-height: calc((#{$content-height} - 3rem - 1.5rem) / 4);
     // so the pickomino can fit in a player container without making it longer
     height: calc(#{$player-height} - 33px); 
     border: solid 1px black;
+    &.choosable {
+      border: solid 3px #c03525;
+    }
   }
 
   .game-board {
