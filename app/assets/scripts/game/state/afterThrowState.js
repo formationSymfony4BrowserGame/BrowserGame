@@ -1,4 +1,4 @@
-import render, { updateHand, updateRemainingDices } from '../render'
+import render, { updateHand, updateRemainingDices, setChoosableValuesButtons } from '../render'
 import turnEndState from './turnEndState'
 import beforeThrowState from './beforeThrowState'
 
@@ -21,6 +21,8 @@ export const chooseValue = (value, data) => {
   // call render function for remainingDices and hand
   updateHand(data)
   updateRemainingDices(data)
+  // remove the Choosable values buttons
+  setChoosableValuesButtons(false, data)
   // call next state
   beforeThrowState(data)
 }
@@ -29,7 +31,7 @@ const afterThrowState = (data) => {
   data.state = 'afterThrowState'
   render(data)
   if (getChoosableValues(data).length === 0) {
-    turnEndState(data)
+    turnEndState(true, data)
   }
 }
 

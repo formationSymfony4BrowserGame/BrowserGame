@@ -1,6 +1,8 @@
 import htmlToElement from 'html-to-element'
 import { throwDices } from './state/beginingState'
 import { getChoosableValues, chooseValue } from './state/afterThrowState'
+import { endTurn } from './state/beforeThrowState'
+import { getChoosablePickomino, getStealablePlayer, chooseSkewerPickomino, stealPlayerPickomino } from './state/pickominoState'
 
 // main render function
 const render = (data) => {
@@ -10,29 +12,48 @@ const render = (data) => {
       updateRemainingDices(data)
       updateHand(data)
       updatePlayersScore(data)
+      colorCurrentPlayerName(true, data)
       break
     case 'beginingState':
       // Colorer le nom du joueur en cours
-      colorCurrentPlayerName(data)
+      colorCurrentPlayerName(true, data)
       // Activer le bouton "lancer"
-      setDisableButton(false, data)
+      enableThrowButton(true, data)
       break
     case 'afterThrowState':
-      // cleanup from previous state
-      setDisableButton(true, data)
+      setEndTurnButton(false, data)
       // add buttons for each choosable values
-      setChoosableValuesButtons(false, data)
+      setChoosableValuesButtons(true, data)
       break
     case 'beforeThrowState':
-      // cleanup from previous state
-      setChoosableValuesButtons(true, data)
+      if (data.remainingDices.length > 0) { // if there is dices left to throw
+        // activate the throw button
+        enableThrowButton(true, data)
+        // show the endTurn button
+        setEndTurnButton(true, data)
+      }
+      break
+    case 'pickominoState':
+      // show and activate the choosable pickomino ( if any ) from the skewerPickomino
+      setChoosablePickomino(data)
+      // show and activate the stealable pickomino ( if any ) from the players
+      setStealablePickomino(data)
+      break
+    case 'turnEndState':
+      // update dices and pickominos
+      updateSkewer(data)
+      updateRemainingDices(data)
+      updateHand(data)
+      updatePlayersScore(data)
+      // uncolor current player name
+      colorCurrentPlayerName(false, data)
   }
 }
 export default render
 
 // html element definition
 const pickominoElement = (pickomino) => htmlToElement(`
-    <div class="pickomino column">
+    <div class="pickomino column" id="pickomino-${pickomino}">
       <p class="value">${pickomino}</p>
       <p class="worms">${Math.floor((pickomino - 21) / 4) + 1} vers</p>
     </div>
@@ -54,7 +75,7 @@ const choosableValueButton = (value) => htmlToElement(`
 `)
 
 // fuctions used for render
-const updateSkewer = (data) => {
+export const updateSkewer = (data) => {
   const skewer = document.getElementById('skewer')
   skewer.innerHTML = ''
   data.skewer.forEach(pickomino => {
@@ -62,7 +83,7 @@ const updateSkewer = (data) => {
   })
 }
 
-const updatePlayersScore = (data) => {
+export const updatePlayersScore = (data) => {
   data.players.forEach(player => {
     const playerScore = document.getElementById(player.ranking + '-score')
     let score = 0
@@ -93,52 +114,99 @@ export const updateRemainingDices = (data) => {
 
 export const updateHand = (data) => {
   const hand = document.getElementById('hand')
+  const handScore = document.getElementById('hand-score-value')
+  let score = 0
   hand.innerHTML = ''
   for (let i = 0; i < 8; i++) {
     const dice = data.hand[i]
     if (dice !== undefined) {
       hand.appendChild(diceElement(dice))
+      score += (dice === 6 ? 5 : dice)
     } else {
       hand.appendChild(emptyDiceElement())
     }
   }
+  handScore.innerHTML = score
 }
 
-const colorCurrentPlayerName = (data) => {
+const colorCurrentPlayerName = (value, data) => {
   // récuperer l'objet du DOM
   const currentPlayerName = document.getElementById(data.currentPlayer + '-name')
-  // ajouter la class de Bulma pour changer la couleur
-  Array.from(currentPlayerName.children).forEach((child) => child.classList.add('has-text-info'))
+  if (value) {
+    // ajouter la class de Bulma pour changer la couleur
+    Array.from(currentPlayerName.children).forEach((child) => child.classList.add('has-text-info'))
+  } else {
+    // remove bulma color class
+    Array.from(currentPlayerName.children).forEach((child) => child.classList.remove('has-text-info'))
+  }
 }
 
-const setDisableButton = (value, data) => {
+// value dertermine if the button should be enabled or not (false = disabled, true = enabled)
+export const enableThrowButton = (value, data) => {
   // récuperer l'objet du DOM
   const throwButton = document.getElementById('button')
   // activer ou désactiver le boutton
   if (value) {
-    throwButton.setAttribute('disabled', String(value))
-    throwButton.onclick = null
-  } else {
     throwButton.removeAttribute('disabled')
     throwButton.onclick = () => throwDices(data)
+  } else {
+    throwButton.setAttribute('disabled', '')
+    throwButton.onclick = null
   }
 }
 
 // set the content of the Choosable Values Buttons container
-// if remove is true, it set the content as '' else it set it as a list of collection of buttons
-const setChoosableValuesButtons = (remove, data) => {
+// value dertermine if the content should be empty or not (false = empty, true = not empty)
+export const setChoosableValuesButtons = (value, data) => {
   // fetch the DOM element of the buttons Container
   const container = document.getElementById('choosable-values-buttons')
 
-  if (remove) {
-    // empty the container
-    container.innerHTML = ''
-  } else {
+  if (value) {
     // for each choosable value create a button Element and add it to the container childrens
     getChoosableValues(data).forEach((value) => {
       const button = choosableValueButton(value)
       button.onclick = () => chooseValue(value, data)
       container.appendChild(button)
     })
+  } else {
+    // empty the container
+    container.innerHTML = ''
+  }
+}
+
+// value dertermine if the content should be empty or not (false = empty, true = not empty)
+const setEndTurnButton = (value, data) => {
+  const endTurnButton = document.getElementById('end-turn-button')
+  if (value) {
+    endTurnButton.classList.add('visible')
+    endTurnButton.onclick = () => {
+      enableThrowButton(false, data)
+      setEndTurnButton(false, data)
+      endTurn(data)
+    }
+  } else {
+    endTurnButton.classList.remove('visible')
+    endTurnButton.onclick = null
+  }
+}
+
+const setChoosablePickomino = (data) => {
+  // getting the choosable pickomino value
+  const choosablePickomino = getChoosablePickomino(data)
+  if (!isNaN(choosablePickomino) && choosablePickomino !== -1) {
+    // fetching the DOM Element of that pickomino
+    const choosablePickominoElement = document.getElementById('pickomino-' + choosablePickomino)
+    choosablePickominoElement.classList.add('choosable')
+    choosablePickominoElement.onclick = () => chooseSkewerPickomino(choosablePickomino, data)
+  }
+}
+
+const setStealablePickomino = (data) => {
+  // getting the stealable player
+  const stealablePlayerRanking = getStealablePlayer(data)
+  if (stealablePlayerRanking !== null) {
+    const stealablePickominoElement = document.getElementById(stealablePlayerRanking + '-score').children[1]
+    stealablePickominoElement.classList.add('choosable')
+    stealablePickominoElement.onclick = () => stealPlayerPickomino(stealablePlayerRanking, data)
   }
 }
