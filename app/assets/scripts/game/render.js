@@ -1,3 +1,4 @@
+import axios from 'axios'
 import htmlToElement from 'html-to-element'
 import { throwDices } from './state/beginingState'
 import { getChoosableValues, chooseValue } from './state/afterThrowState'
@@ -15,17 +16,20 @@ const render = (data) => {
       colorCurrentPlayerName(true, data)
       break
     case 'beginingState':
+      setSaveButton(true, data)
       // Colorer le nom du joueur en cours
       colorCurrentPlayerName(true, data)
       // Activer le bouton "lancer"
       enableThrowButton(true, data)
       break
     case 'afterThrowState':
+      setSaveButton(true, data)
       setEndTurnButton(false, data)
       // add buttons for each choosable values
       setChoosableValuesButtons(true, data)
       break
     case 'beforeThrowState':
+      setSaveButton(true, data)
       if (data.remainingDices.length > 0) { // if there is dices left to throw
         // activate the throw button
         enableThrowButton(true, data)
@@ -34,12 +38,14 @@ const render = (data) => {
       }
       break
     case 'pickominoState':
+      setSaveButton(true, data)
       // show and activate the choosable pickomino ( if any ) from the skewerPickomino
       setChoosablePickomino(data)
       // show and activate the stealable pickomino ( if any ) from the players
       setStealablePickomino(data)
       break
     case 'turnEndState':
+      setSaveButton(true, data)
       // update dices and pickominos
       updateSkewer(data)
       updateRemainingDices(data)
@@ -208,5 +214,23 @@ const setStealablePickomino = (data) => {
     const stealablePickominoElement = document.getElementById(stealablePlayerRanking + '-score').children[1]
     stealablePickominoElement.classList.add('choosable')
     stealablePickominoElement.onclick = () => stealPlayerPickomino(stealablePlayerRanking, data)
+  }
+}
+
+const setSaveButton = (value, data) => {
+  const saveButton = document.getElementById('save-game')
+  if (value) {
+    saveButton.onclick = () => {
+      axios({
+        method: 'post',
+        url: '/save',
+        data: JSON.stringify(data)
+      })
+      setSaveButton(false, data)
+    }
+    saveButton.removeAttribute('disabled')
+  } else {
+    saveButton.onclick = null
+    saveButton.setAttribute('disabled', '')
   }
 }

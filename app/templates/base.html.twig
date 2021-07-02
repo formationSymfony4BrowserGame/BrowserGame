@@ -66,6 +66,7 @@
                                 <a href='{{ path('app_login') }}' class='button is-primary'>Se connecter</a>
                             </div>
                         {% else %}
+                            {% block saveButton %}{% endblock %}
                             <a href="{{ path('app_logout') }}" class="button is-primary">Se déconnecter</a>    
                         {% endif %}
                         {% if app.user %}
