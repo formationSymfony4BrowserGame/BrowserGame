@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} - Score{% endblock %}
+
+{% block body %}
+    <main class="container">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Position</th>
+                    <th>Pseudo</th>
+                    <th>Points</th>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th>1</th>
+                    <td>User1</td>
+                    <td>56</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>2</th>
+                    <td>User2</td>
+                    <td>34</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>3</th>
+                    <td>User3</td>
+                    <td>31</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>4</th>
+                    <td>User14</td>
+                    <td>28</td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        {#<form method="post" action="{{ path('delete_game', {'id': game.id}) }}">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ game.id) }}">
+            <button class="button is-success mt-3">Terminer</button>
+        </form>#}
+        <button class="button is-success mt-3">Terminer</button>
+    </main>
+{% endblock %}
