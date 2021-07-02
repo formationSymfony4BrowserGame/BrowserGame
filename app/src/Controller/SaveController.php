@@ -6,7 +6,6 @@ use App\Entity\Player;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -14,25 +13,17 @@ use Symfony\Component\HttpFoundation\Response;
 class SaveController extends AbstractController
 {
     /**
-     * @var EntityManagerInterface
-     */
-    private $entityManager;
-
-    public function __construct( EntityManagerInterface $entityManager) 
-    {
-        $this->entityManager = $entityManager;
-    }
-
-    /**
-     * @Route("/save", name="save", methods={"POST"})
+     * @Route("/save", name="save", methods={"POST","GET"})
      */
     public function save(Request $request): Response
     {
         $data = json_decode($request->getContent(), true);
+        //dump($data);
         
-        $game = new Game();
-
         if (!empty($data)){
+
+            $em = $this->getDoctrine()->getManager();
+            $game = new Game();
             
             $user = $this->getuser();
             $game->setUser($user);
@@ -46,14 +37,22 @@ class SaveController extends AbstractController
             $game->setRemainingDices($data['remainingDices']);
             $game->setGameState($data['state']);
     
-            $this->entityManager->persist($game);
-            $this->entityManager->flush();
-    
-            return $this->addFlash('success', 'Votre partie a été sauvegardée avec succès!');    
+            $em->persist($game);
+            $em->flush();
+
+            for ($i=0; $i<$data['playerCount']; $i++){
+
+                $player = new Player;
+                $player->setPseudo($data['players'][$i]['pseudo']);
+                $player->setRanking($data['players'][$i]['ranking']);
+                $player->setPickominos($data['players'][$i]['pickominos']);
+                $player->setGame($game);
+                $em->persist($player);
+                $em->flush();    
+            }
+            $this->addFlash('success', 'Votre partie a été bien sauvegardée!');
         }
 
-        return $this->render('accueil/index.html.twig', [
-        ]);
-
+        return $this->redirect($this->generateUrl('accueil'));
     }
 }

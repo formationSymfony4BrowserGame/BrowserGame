@@ -6,11 +6,13 @@
     <main class="container">
         {# game presentation #}
         <section class="section">
-            {% for message in app.flashes('success') %}
-                <div class="columns has-background-success mt-3 has-text-white has-text-weight-bold p-2">
-                    <p>{{ message }}</p>
-                </div>
-            {% endfor %}
+
+        {% for message in app.flashes('success') %}
+            <div class="columns has-background-success mt-3 has-text-white has-text-weight-bold p-2">
+                {{ message }}
+            </div>
+        {% endfor %}
+
             <p class="is-size-3 is-uppercase">Pickomino</p>
             <div class="columns is-vcentered">
                 <div class="column is-two-thirds">
