@@ -11,8 +11,12 @@
     }) }}
 {% endblock %}
 
+{% block saveButton %}
+    <a class="button is-info mr-3" id="save-game">Sauvegarder la partie</a>
+{% endblock %}
+
 {% block body %}
-    <a class="button is-info mr-3" id="save_game">Sauvegarder la partie</a>
+    
 
   <div class="columns" id="game-container">
     {# left side containing the player list #}
