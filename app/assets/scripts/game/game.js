@@ -1,3 +1,4 @@
+import axios from 'axios'
 import render from './render'
 import beginingState from './state/beginingState'
 import afterThrowState from './state/afterThrowState'
@@ -79,6 +80,20 @@ const load = (game) => {
       break
   }
 }
+
+// Saved Game
+
+const saveButton = document.getElementById('save_game')
+
+const handleSubmit = (game) => {
+  axios({
+    method: 'post',
+    url: '/save',
+    data: JSON.stringify(game)
+  })
+}
+
+saveButton.onclick = () => handleSubmit(data)
 
 // allow them to be called from outside webpacked assets
 window.start = start

@@ -25,6 +25,7 @@
     {% block javascripts %}{% endblock %}
     {# Javascript: assets/app.js #}
     {{ encore_entry_script_tags('app') }}
+
 </head>
 
 <body>
@@ -61,6 +62,7 @@
                     <div class='navbar-item'>
                         {% if not app.user %}
                             <div class='buttons'>
+                                {% block saveButton %}{% endblock %}
                                 <a href='{{ path('app_register') }}' class='button is-primary'>S'inscrire</a>
                                 <a href='{{ path('app_login') }}' class='button is-primary'>Se connecter</a>
                             </div>

@@ -1,13 +1,15 @@
-{% extends 'baseGame.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %} - Charger une partie{% endblock %}
 
 {% block javascripts %}
-  {{ encore_entry_script_tags("load") }}
+    {{ encore_entry_script_tags("load") }}
+    {{ encore_entry_script_tags("game") }}
 {% endblock %}
 
 
 {% block body %}
+    {% block saveButton %}<a class="button is-info mr-3" id="save_game">Sauvegarder la partie</a>{% endblock %}
 
 <main class="container" id="play-container">
     <form action="{{ path("game") }}" method="post" id="form">
