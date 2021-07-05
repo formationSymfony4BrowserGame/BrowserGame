@@ -11,13 +11,53 @@
     }) }}
 {% endblock %}
 
-{% block saveButton %}
-    <a href="{{path('save')}}" class="button is-info mr-3" id="save-game">Sauvegarder la partie</a>
+
+{% block navbarGame %}
+    <div class='navbar-brand'>
+        <button class="button anchorTemplate navbar-item" value="/" id="logo">
+            <img src="/safari-pinned-tab.svg" id="svg-icon">
+            <p class="m-1 is-size-5">Pickomino</p>
+        </button>
+        {# Burger for mobile or small screens #}
+        <a role='button' class='navbar-burger' aria-label='menu' aria-expanded='false' data-target="navMenu">
+        <span aria-hidden='true'></span>
+        <span aria-hidden='true'></span>
+        <span aria-hidden='true'></span>
+        </a>
+    </div>
+    {# Main menu #}
+    <div class='navbar-menu' id="navMenu">
+        {# Left part of the main menu #}
+        <div class='navbar-start is-size-4'>
+            {# 
+                Each link is supposed to have a call to path('routeName').
+                To use active link styles we use a Twig if: if route_name == routeName we add the "is-active" class to the link.
+            #}
+            <button value="/" class="button ml-1 is-size-4 anchorTemplate navbar-item is-tab {% if route_name == 'accueil' %}is-active {% else %} {% endif %}">Accueil</button>
+            <button value="/regle" class="button ml-1 is-size-4 anchorTemplate navbar-item is-tab {% if route_name == 'regle' %}is-active {% else %} {% endif %}">Règles</button>
+            <button value="/game/play" class=" button ml-1 is-size-4 anchorTemplate navbar-item is-tab {% if route_name == 'play' %}is-active {% else %} {% endif %}">Jouer</button>
+        </div>
+        {# Right part of the main menu #}
+        <div class='navbar-end'>
+            <div class='navbar-item'>
+                <a href="{{path('save')}}" class="button is-info mr-3" id="save-game">Sauvegarder la partie</a>
+                <button value="/logout" class="button anchorTemplate is-primary">Se déconnecter</button>    
+                <span class="icon ml-5 is-medium has-background-white">
+                    <button class="anchorTemplate button is-ghost" value="/compte/parameters"><i class="has-text-primary" data-feather="user"></i></button>
+                </span>
+            </div>
+        </div>
+    </div>
 {% endblock %}
+
 
 {% block body %}
     
 <div class="columns" id="game-container">
+
+    {# Model before exit #}
+    <div id="saveModal"></div>
+
     {# left side containing the player list #}
     <div class="column player-list is-2">
         {# for each players we add a .player block, ids will be used by JS to update values #}

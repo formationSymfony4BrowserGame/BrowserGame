@@ -16,20 +16,23 @@ const render = (data) => {
       colorCurrentPlayerName(true, data)
       break
     case 'beginingState':
-      setSaveButton(true, data)
+      modalSaveGame(true, data, 'save')
+      setSaveButton(true, data, 'save-game')
       // Colorer le nom du joueur en cours
       colorCurrentPlayerName(true, data)
       // Activer le bouton "lancer"
       enableThrowButton(true, data)
       break
     case 'afterThrowState':
-      setSaveButton(true, data)
+      modalSaveGame(true, data, 'save')
+      setSaveButton(true, data, 'save-game')
       setEndTurnButton(false, data)
       // add buttons for each choosable values
       setChoosableValuesButtons(true, data)
       break
     case 'beforeThrowState':
-      setSaveButton(true, data)
+      modalSaveGame(true, data, 'save')
+      setSaveButton(true, data, 'save-game')
       if (data.remainingDices.length > 0) { // if there is dices left to throw
         // activate the throw button
         enableThrowButton(true, data)
@@ -38,14 +41,16 @@ const render = (data) => {
       }
       break
     case 'pickominoState':
-      setSaveButton(true, data)
+      modalSaveGame(true, data, 'save')
+      setSaveButton(true, data, 'save-game')
       // show and activate the choosable pickomino ( if any ) from the skewerPickomino
       setChoosablePickomino(data)
       // show and activate the stealable pickomino ( if any ) from the players
       setStealablePickomino(data)
       break
     case 'turnEndState':
-      setSaveButton(true, data)
+      modalSaveGame(true, data, 'save')
+      setSaveButton(true, data, 'save-game')
       // update dices and pickominos
       updateSkewer(data)
       updateRemainingDices(data)
@@ -217,8 +222,8 @@ const setStealablePickomino = (data) => {
   }
 }
 
-const setSaveButton = (value, data) => {
-  const saveButton = document.getElementById('save-game')
+const setSaveButton = (value, data, id) => {
+  const saveButton = document.getElementById(id)
   if (value) {
     saveButton.onclick = () => {
       axios({
@@ -232,5 +237,48 @@ const setSaveButton = (value, data) => {
   } else {
     saveButton.onclick = null
     saveButton.setAttribute('disabled', '')
+  }
+}
+// Modal creation
+const modalElement = (value) => htmlToElement(`
+<div class="modal" id="showmodal">
+  <div class="modal-background"></div>
+  <div class="modal-content">
+      <div class="section modal-wrap" >
+          <div class="column has-text-centered">
+              <p>Vous voulez sauvegarder la partie avant de quitter le jeu?</p>
+              <a href="/save" class="button is-success mt-2" id="save" >OUI, je sauvegarde</a>
+              <a href="${value}" class="button is-danger mt-2">Non, merci</a>
+          </div>
+      </div>
+  </div>
+  <button class="modal-close is-large" aria-label="close" id="cancel"></button>
+</div>`
+)
+// function to bring up the modal
+const modalSaveGame = (valeur, data, id) => {
+  // all internal links of the app
+  const anchorTemplate = document.getElementsByClassName('anchorTemplate')
+  // empty div
+  const savemodal = document.getElementById('saveModal')
+
+  // for each element having the class anchorTemplate
+  for (let i = 0, len = anchorTemplate.length; i < len; i++) {
+    // open modal
+    anchorTemplate[i].onclick = () => {
+      savemodal.appendChild(modalElement(anchorTemplate[i].value))
+      const modal = document.getElementById('showmodal')
+      modal.style.display = 'block'
+    }
+    //
+    savemodal.appendChild(modalElement(anchorTemplate[i].value))
+    setSaveButton(valeur, data, id)
+    // close modal
+    savemodal.appendChild(modalElement(anchorTemplate[i].value))
+    const close = document.getElementById('cancel')
+    close.onclick = () => {
+      const modal = document.getElementById('showmodal')
+      modal.style.display = 'none'
+    }
   }
 }

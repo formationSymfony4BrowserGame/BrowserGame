@@ -2,6 +2,53 @@
 
 {% block title %}Règle{% endblock %}
 
+{% block navbarCommon %}
+    <div class='navbar-brand'>
+        <a class="navbar-item" href="{{ path('accueil') }}" id="logo">
+            <img src="/safari-pinned-tab.svg" id="svg-icon">
+            <p class="m-1 is-size-5">Pickomino</p>
+        </a>
+        {# Burger for mobile or small screens #}
+        <a role='button' class='navbar-burger' aria-label='menu' aria-expanded='false' data-target="navMenu">
+        <span aria-hidden='true'></span>
+        <span aria-hidden='true'></span>
+        <span aria-hidden='true'></span>
+        </a>
+    </div>
+    {# Main menu #}
+    <div class='navbar-menu' id="navMenu">
+        {# Left part of the main menu #}
+        <div class='navbar-start is-size-4'>
+            {# 
+                Each link is supposed to have a call to path('routeName').
+                To use active link styles we use a Twig if: if route_name == routeName we add the "is-active" class to the link.
+            #}
+            <a href="{{ path('accueil') }}" class="anchorTemplate navbar-item is-tab {% if route_name == 'accueil' %}is-active {% else %} {% endif %}">Accueil</a>
+            <a href='{{ path('regle') }}' class="anchorTemplate navbar-item is-tab {% if route_name == 'regle' %}is-active {% else %} {% endif %}">Règles</a>
+            <a href='{{ path('play') }}' class="anchorTemplate navbar-item is-tab {% if route_name == 'play' %}is-active {% else %} {% endif %}">Jouer</a>
+        </div>
+        {# Right part of the main menu #}
+        <div class='navbar-end'>
+            <div class='navbar-item'>
+                {% if not app.user %}
+                    <div class='buttons'>
+                        <a href='{{ path('app_register') }}' class='button is-primary'>S'inscrire</a>
+                        <a href='{{ path('app_login') }}' class='button is-primary'>Se connecter</a>
+                    </div>
+                {% else %}
+                    {% block saveButton %}{% endblock %}
+                    <a href="{{ path('app_logout') }}" class="anchorTemplate button is-primary">Se déconnecter</a>    
+                {% endif %}
+                {% if app.user %}
+                    <span class="icon ml-5 is-medium has-background-white">
+                        <a class="anchorTemplate" href="{{ path('compte_parameters') }}"><i class="has-text-primary" data-feather="user"></i></a>
+                    </span>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
 {% block body %}
     <main class="container">
 
