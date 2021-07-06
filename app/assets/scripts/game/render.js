@@ -267,10 +267,11 @@ const modalSaveGame = (valeur, data, id) => {
   // for each element having the class anchorTemplate
   for (let i = 0, len = anchorTemplate.length; i < len; i++) {
     // open modal
-    anchorTemplate[i].onclick = () => {
-      savemodal.appendChild(modalElement(anchorTemplate[i].value))
+    anchorTemplate[i].onclick = (event) => {
+      savemodal.appendChild(modalElement(anchorTemplate[i].href))
       const modal = document.getElementById('showmodal')
       modal.style.display = 'block'
+      event.preventDefault()
       //
       setSaveButton(valeur, data, id)
       // close modal

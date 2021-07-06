@@ -54,9 +54,9 @@
                             Each link is supposed to have a call to path('routeName').
                             To use active link styles we use a Twig if: if route_name == routeName we add the "is-active" class to the link.
                         #}
-                        <a href="{{ path('accueil') }}" class="anchorTemplate navbar-item is-tab {% if route_name == 'accueil' %}is-active {% else %} {% endif %}">Accueil</a>
-                        <a href='{{ path('regle') }}' class="anchorTemplate navbar-item is-tab {% if route_name == 'regle' %}is-active {% else %} {% endif %}">Règles</a>
-                        <a href='{{ path('play') }}' class="anchorTemplate navbar-item is-tab {% if route_name == 'play' %}is-active {% else %} {% endif %}">Jouer</a>
+                        <a href="{{ path('accueil') }}" class="navbar-item is-tab {% if route_name == 'accueil' %}is-active {% else %} {% endif %}">Accueil</a>
+                        <a href='{{ path('regle') }}' class="navbar-item is-tab {% if route_name == 'regle' %}is-active {% else %} {% endif %}">Règles</a>
+                        <a href='{{ path('play') }}' class="navbar-item is-tab {% if route_name == 'play' %}is-active {% else %} {% endif %}">Jouer</a>
                     </div>
                     {# Right part of the main menu #}
                     <div class='navbar-end'>
@@ -68,7 +68,7 @@
                                 </div>
                             {% else %}
                                 {% block saveButton %}{% endblock %}
-                                <a href="{{ path('app_logout') }}" class="anchorTemplate button is-primary">Se déconnecter</a>    
+                                <a href="{{ path('app_logout') }}" class="button is-primary">Se déconnecter</a>    
                             {% endif %}
                             {% if app.user %}
                                 <span class="icon ml-5 is-medium has-background-white">
