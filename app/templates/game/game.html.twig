@@ -12,7 +12,7 @@
 {% endblock %}
 
 
-{% block navbarGame %}
+{% block navbar %}
     <div class='navbar-brand'>
         <button class="button anchorTemplate navbar-item" value="/" id="logo">
             <img src="/safari-pinned-tab.svg" id="svg-icon">
@@ -33,9 +33,9 @@
                 Each link is supposed to have a call to path('routeName').
                 To use active link styles we use a Twig if: if route_name == routeName we add the "is-active" class to the link.
             #}
-            <button value="/" class="button ml-1 is-size-4 anchorTemplate navbar-item is-tab {% if route_name == 'accueil' %}is-active {% else %} {% endif %}">Accueil</button>
-            <button value="/regle" class="button ml-1 is-size-4 anchorTemplate navbar-item is-tab {% if route_name == 'regle' %}is-active {% else %} {% endif %}">Règles</button>
-            <button value="/game/play" class=" button ml-1 is-size-4 anchorTemplate navbar-item is-tab {% if route_name == 'play' %}is-active {% else %} {% endif %}">Jouer</button>
+            <button value="/" class=" Butbor button ml-1 is-size-4 anchorTemplate navbar-item is-tab {% if route_name == 'accueil' %}is-active {% else %} {% endif %}">Accueil</button>
+            <button value="/regle" class="button Butbor ml-1 is-size-4 anchorTemplate navbar-item is-tab {% if route_name == 'regle' %}is-active {% else %} {% endif %}">Règles</button>
+            <button value="/game/play" class=" Butbor button ml-1 is-size-4 anchorTemplate navbar-item is-tab {% if route_name == 'play' %}is-active {% else %} {% endif %}">Jouer</button>
         </div>
         {# Right part of the main menu #}
         <div class='navbar-end'>

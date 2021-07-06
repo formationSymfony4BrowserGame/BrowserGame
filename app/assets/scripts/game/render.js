@@ -85,6 +85,23 @@ const choosableValueButton = (value) => htmlToElement(`
   </button>
 `)
 
+// Modal creation
+const modalElement = (value) => htmlToElement(`
+<div class="modal" id="showmodal">
+  <div class="modal-background"></div>
+  <div class="modal-content">
+      <div class="section modal-wrap" >
+          <div class="column has-text-centered">
+              <p>Voulez vous sauvegarder la partie avant de quitter le jeu?</p>
+              <a href="/save" class="button is-success mt-2" id="save" >OUI, je sauvegarde</a>
+              <a href="${value}" class="button is-danger mt-2">Non, merci</a>
+          </div>
+      </div>
+  </div>
+  <button class="modal-close is-large" aria-label="close" id="cancel"></button>
+</div>`
+)
+
 // fuctions used for render
 export const updateSkewer = (data) => {
   const skewer = document.getElementById('skewer')
@@ -239,22 +256,7 @@ const setSaveButton = (value, data, id) => {
     saveButton.setAttribute('disabled', '')
   }
 }
-// Modal creation
-const modalElement = (value) => htmlToElement(`
-<div class="modal" id="showmodal">
-  <div class="modal-background"></div>
-  <div class="modal-content">
-      <div class="section modal-wrap" >
-          <div class="column has-text-centered">
-              <p>Voulez vous sauvegarder la partie avant de quitter le jeu?</p>
-              <a href="/save" class="button is-success mt-2" id="save" >OUI, je sauvegarde</a>
-              <a href="${value}" class="button is-danger mt-2">Non, merci</a>
-          </div>
-      </div>
-  </div>
-  <button class="modal-close is-large" aria-label="close" id="cancel"></button>
-</div>`
-)
+
 // function to bring up the modal
 const modalSaveGame = (valeur, data, id) => {
   // all internal links of the app
