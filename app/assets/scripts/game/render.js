@@ -246,7 +246,7 @@ const modalElement = (value) => htmlToElement(`
   <div class="modal-content">
       <div class="section modal-wrap" >
           <div class="column has-text-centered">
-              <p>Vous voulez sauvegarder la partie avant de quitter le jeu?</p>
+              <p>Voulez vous sauvegarder la partie avant de quitter le jeu?</p>
               <a href="/save" class="button is-success mt-2" id="save" >OUI, je sauvegarde</a>
               <a href="${value}" class="button is-danger mt-2">Non, merci</a>
           </div>
@@ -269,16 +269,14 @@ const modalSaveGame = (valeur, data, id) => {
       savemodal.appendChild(modalElement(anchorTemplate[i].value))
       const modal = document.getElementById('showmodal')
       modal.style.display = 'block'
-    }
-    //
-    savemodal.appendChild(modalElement(anchorTemplate[i].value))
-    setSaveButton(valeur, data, id)
-    // close modal
-    savemodal.appendChild(modalElement(anchorTemplate[i].value))
-    const close = document.getElementById('cancel')
-    close.onclick = () => {
-      const modal = document.getElementById('showmodal')
-      modal.style.display = 'none'
+      //
+      setSaveButton(valeur, data, id)
+      // close modal
+      const close = document.getElementById('cancel')
+      close.onclick = () => {
+        const modal = document.getElementById('showmodal')
+        modal.style.display = 'none'
+      }
     }
   }
 }
