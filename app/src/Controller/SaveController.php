@@ -32,13 +32,12 @@ class SaveController extends AbstractController
             $game->setDate($date);
     
             $game->setPlayerCount($data['playerCount']);
-            $game->setCurrentPlayerId($data['currentPlayer']);
+            $game->setCurrentPlayerId(0);
             $game->setHand($data['hand']);
             $game->setRemainingDices($data['remainingDices']);
             $game->setGameState($data['state']);
     
             $em->persist($game);
-            $em->flush();
 
             for ($i=0; $i<$data['playerCount']; $i++){
 
@@ -48,8 +47,16 @@ class SaveController extends AbstractController
                 $player->setPickominos($data['players'][$i]['pickominos']);
                 $player->setGame($game);
                 $em->persist($player);
-                $em->flush();    
+                $em->flush();
+
+                if ($data['players'][$i]['ranking'] == $data['currentPlayer']) {
+                    $id = $player->getId();
+                    $game->setCurrentPlayerId($id);
+                    $em->persist($game);
+                }
             }
+
+            $em->flush();
             $this->addFlash('success', 'Votre partie a été bien sauvegardée!');
         }
 
