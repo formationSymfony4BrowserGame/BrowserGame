@@ -16,7 +16,7 @@
             <tbody>
             {% for player in players %}
                 <tr>
-                    <th class="pl-5 pr-5"></th>
+                    <th class="pl-5 pr-5">{{ loop.index }}</th>
                     <td class="pl-5 pr-5">{{ player.pseudo }}</td>
                     <td class="pl-5 pr-5">{{ player.score }}</td>
                 </tr>
