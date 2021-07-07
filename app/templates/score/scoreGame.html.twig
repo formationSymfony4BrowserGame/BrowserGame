@@ -4,29 +4,28 @@
 
 {% block body %}
     <main class="container">
-        <table class="table">
+        <center><table class="table mt-6"></center>
             <thead>
                 <tr>
-                    <th>Position</th>
-                    <th>Pseudo</th>
-                    <th>Points</th>
+                    <th class="pl-5 pr-5">Position</th>
+                    <th class="pl-5 pr-5">Pseudo</th>
+                    <th class="pl-5 pr-5">Points</th>
                     <td></td>
                 </tr>
             </thead>
             <tbody>
             {% for player in players %}
                 <tr>
-                    <th></th>
-                    <td>User1</td>
-                    <td>56</td>
-                    <td></td>
+                    <th class="pl-5 pr-5">{% for i in range(0, 3) %}{{ i }}{% endfor %}</th>
+                    <td class="pl-5 pr-5">{{ player.pseudo }}</td>
+                    <td class="pl-5 pr-5">{{ player.score }}</td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
         <form method="post" action="{{ path('delete_game', {'id': game.id}) }}">
             <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ game.id) }}">
-            <input type="submit" class="button is-success mt-3" value="Terminer">
+            <input type="submit" class="button is-success mt-5 mb-6" value="Terminer">
         </form>
     </main>
 {% endblock %}
