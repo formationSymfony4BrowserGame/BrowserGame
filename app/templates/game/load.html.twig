@@ -3,12 +3,11 @@
 {% block title %} - Charger une partie{% endblock %}
 
 {% block javascripts %}
-  {{ encore_entry_script_tags("load") }}
+    {{ encore_entry_script_tags("load") }}
 {% endblock %}
 
 
 {% block body %}
-
 <main class="container" id="play-container">
     <form action="{{ path("game") }}" method="post" id="form">
         <div class="field">

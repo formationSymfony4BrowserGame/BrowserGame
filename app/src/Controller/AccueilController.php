@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AccueilController extends AbstractController
 {
+
     /**
      * @Route("/", name="accueil")
      */
@@ -16,4 +17,5 @@ class AccueilController extends AbstractController
         return $this->render('accueil/index.html.twig', [
         ]);
     }
+
 }
