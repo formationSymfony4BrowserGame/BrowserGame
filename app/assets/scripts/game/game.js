@@ -6,7 +6,7 @@ import pickominoState from './state/pickominoState'
 import turnEndState from './state/turnEndState'
 
 const data = {
-  idGame: 1,
+  idGame: null,
   currentPlayer: 0,
   playerCount: 0,
   hand: [],

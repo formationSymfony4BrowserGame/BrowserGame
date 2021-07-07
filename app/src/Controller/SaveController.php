@@ -20,9 +20,9 @@ class SaveController extends AbstractController
         $em = $this->getDoctrine()->getManager();
 
         $data = json_decode($request->getContent(), true);
-        //dump($data);
 
         $user = $this->getuser();
+        
         $games = $user->getGames();
         $idGame = [];
         foreach($games as $game){
@@ -33,6 +33,7 @@ class SaveController extends AbstractController
         if (!empty($data)){
 
             if(in_array($data['idGame'], $idGame)){
+                // Partie est déjà sauvegardée, on l'actualise avec les nouvelles données
 
                 $savedGame = $em->getRepository(Game::class)->findOneBy([
                     'id' => $idGame
@@ -72,7 +73,7 @@ class SaveController extends AbstractController
                 $this->addFlash('success', 'Votre partie a été bien sauvegardée!');    
 
             }else{
-
+                //Sauvegarder une nouvelle partie
                 $game = new Game();
                 
                 $game->setUser($user);
