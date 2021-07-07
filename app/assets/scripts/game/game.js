@@ -6,6 +6,7 @@ import pickominoState from './state/pickominoState'
 import turnEndState from './state/turnEndState'
 
 const data = {
+  idGame: 1,
   currentPlayer: 0,
   playerCount: 0,
   hand: [],
@@ -43,6 +44,7 @@ const start = (players) => {
 }
 
 const load = (game) => {
+  data.idGame = game.id
   data.hand = game.hand
   data.remainingDices = game.remainingDices
   data.players = game.players

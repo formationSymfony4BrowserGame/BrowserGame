@@ -30,10 +30,11 @@ services:
       - ./app:/app:cached
       - .bashrc:/root/.bashrc
       - var:/app/var
-      - ./vendor:/app/vendor:cached
+      - vendor:/app/vendor
     environment:
       WEB_DOCUMENT_ROOT: /app/public
     restart: always
 volumes: 
   db_data:
   var:
+  vendor:
