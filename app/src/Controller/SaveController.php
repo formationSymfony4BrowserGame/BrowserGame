@@ -13,38 +13,24 @@ use Symfony\Component\HttpFoundation\Response;
 class SaveController extends AbstractController
 {
     /**
-     * @Route("/save", name="save", methods={"POST","GET"})
+     * @Route("/save", name="save", methods={"POST"})
      */
     public function save(Request $request): Response
     {
-        $em = $this->getDoctrine()->getManager();
 
         $data = json_decode($request->getContent(), true);
-
-        $user = $this->getuser();
         
-        $games = $user->getGames();
-        $idGame = [];
-        foreach($games as $game){
-            $id = $game->getId();
-            $idGame[] = $id;
-        }
-
-        if (!empty($data)){
-
-            if(in_array($data['idGame'], $idGame)){
+        $savedGame = null;
+        if (!empty($data)) {
+            $user = $this->getuser();
+            $em = $this->getDoctrine()->getManager();
+            $savedGame = ($data['idGame'] == null) ? null : $em->getRepository(Game::class)->find($data['idGame']);
+            if($savedGame != null && $savedGame->getUser() == $user){
                 // Partie est déjà sauvegardée, on l'actualise avec les nouvelles données
 
-                $savedGame = $em->getRepository(Game::class)->findOneBy([
-                    'id' => $idGame
-                ]);
-                
-                $savedGame->setUser($user);
-        
                 $date = new \DateTime();
                 $savedGame->setDate($date);
-        
-                $savedGame->setPlayerCount($data['playerCount']);
+
                 $savedGame->setCurrentPlayerId(0);
                 $savedGame->setHand($data['hand']);
                 $savedGame->setRemainingDices($data['remainingDices']);
@@ -54,7 +40,10 @@ class SaveController extends AbstractController
     
                 for ($i=0; $i<$data['playerCount']; $i++){
     
-                    $player = new Player;
+                    $player = $em->getRepository(Player::class)->find($data['players'][$i]['id']);
+                    if ($player == null){
+                        $player = new Player();
+                    }
                     $player->setPseudo($data['players'][$i]['pseudo']);
                     $player->setRanking($data['players'][$i]['ranking']);
                     $player->setPickominos($data['players'][$i]['pickominos']);
@@ -72,7 +61,7 @@ class SaveController extends AbstractController
                 $em->flush();
                 $this->addFlash('success', 'Votre partie a été bien sauvegardée!');    
 
-            }else{
+            } else if($savedGame == null) {
                 //Sauvegarder une nouvelle partie
                 $game = new Game();
                 
@@ -91,7 +80,7 @@ class SaveController extends AbstractController
     
                 for ($i=0; $i<$data['playerCount']; $i++){
     
-                    $player = new Player;
+                    $player = new Player();
                     $player->setPseudo($data['players'][$i]['pseudo']);
                     $player->setRanking($data['players'][$i]['ranking']);
                     $player->setPickominos($data['players'][$i]['pickominos']);
@@ -111,6 +100,19 @@ class SaveController extends AbstractController
 
             }
         }
+        // return $this->redirect($this->generateUrl('accueil'));
+        $res = new Response();
+        $res->setContent(json_encode(($savedGame == null) ? null : $savedGame->getId()));
+        $res->headers->set('Content-Type', 'application/json');
+
+        return $res;
+    }
+
+    /**
+     * @Route("/save", name="saveRedirect", methods={"GET"})
+     */
+    public function saveRedirect(Request $request): Response
+    {
         return $this->redirect($this->generateUrl('accueil'));
     }
 }

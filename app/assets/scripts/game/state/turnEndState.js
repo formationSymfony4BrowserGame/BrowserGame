@@ -1,5 +1,6 @@
 import render from '../render'
 import beginingState from './beginingState'
+import gameEndState from './gameEndState'
 
 const loosePickomino = (data) => {
   const currentPlayerIndex = data.players.findIndex((player) => player.ranking === data.currentPlayer)
@@ -27,7 +28,11 @@ const turnEndState = (isHandNull, data) => {
   render(data)
   // change currentPlayer to the next player ranking
   data.currentPlayer = (data.currentPlayer + 1) % data.players.length
-  beginingState(data)
+  if (data.skewer.length > 0) {
+    beginingState(data)
+  } else {
+    gameEndState(data)
+  }
 }
 
 export default turnEndState
