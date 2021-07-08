@@ -96,13 +96,24 @@
             {% if route_name == 'compte_histories' %}
             <div class="has-text-centered">
                 {% if histories is empty %}
-                <h3>Votre historique est vide pour le moment</h3>
+                    <h3>Votre historique est vide pour le moment</h3>
                 {% else %}
-                <ul>
-                    {% for history in histories %}
-                        <li><h4> Partie du {{ history.date|date("d/m/Y") }} </h4></li>
-                    {% endfor %}
-                </ul>
+                    <ul>
+                        {% for history in histories %}
+                            <li>
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-header-title">Partie du {{ history.date|date("d/m/Y") }}</h4>
+                                    </div>
+                                    <div class="card-content columns">
+                                        {% for player in history.players %}
+                                            <div class="column">{{ player.pseudo }}: {{ player.score }}Vers</div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
                 {% endif %}
             </div>
             {% endif %}

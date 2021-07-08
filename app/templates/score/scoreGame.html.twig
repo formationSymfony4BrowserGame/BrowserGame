@@ -25,7 +25,7 @@
         </table>
         <form method="post" action="{{ path('delete_game', {'id': game.id}) }}">
             <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ game.id) }}">
-            <input type="submit" class="button is-success mt-5 mb-6" value="Terminer">
+            <input type="submit" class="button is-success mt-5 mb-6" value="Terminer la partie">
         </form>
     </main>
 {% endblock %}

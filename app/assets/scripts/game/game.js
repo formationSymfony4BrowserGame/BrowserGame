@@ -4,6 +4,7 @@ import afterThrowState from './state/afterThrowState'
 import beforeThrowState from './state/beforeThrowState'
 import pickominoState from './state/pickominoState'
 import turnEndState from './state/turnEndState'
+import gameEndState from './state/gameEndState'
 
 const data = {
   idGame: null,
@@ -79,6 +80,8 @@ const load = (game) => {
     case 'turnEndState':
       turnEndState(data)
       break
+    case 'gameEndState':
+      gameEndState(data)
   }
 }
 

@@ -4,9 +4,10 @@ import { throwDices } from './state/beginingState'
 import { getChoosableValues, chooseValue } from './state/afterThrowState'
 import { endTurn } from './state/beforeThrowState'
 import { getChoosablePickomino, getStealablePlayer, chooseSkewerPickomino, stealPlayerPickomino } from './state/pickominoState'
+import { gameEndSave } from './state/gameEndState'
 
 // main render function
-const render = (data) => {
+const render = async (data) => {
   switch (data.state) {
     case 'loading':
       updateSkewer(data)
@@ -58,6 +59,10 @@ const render = (data) => {
       updatePlayersScore(data)
       // uncolor current player name
       colorCurrentPlayerName(false, data)
+      break
+    case 'gameEndState':
+      await gameEndSave(data)
+      showGameEndModal(data)
   }
 }
 export default render
@@ -86,15 +91,31 @@ const choosableValueButton = (value) => htmlToElement(`
 `)
 
 // Modal creation
-const modalElement = (value) => htmlToElement(`
+const saveModalElement = (value) => htmlToElement(`
 <div class="modal" id="showmodal">
   <div class="modal-background"></div>
   <div class="modal-content">
       <div class="section modal-wrap" >
           <div class="column has-text-centered">
               <p>Voulez vous sauvegarder la partie avant de quitter le jeu?</p>
-              <a href="/save" class="button is-success mt-2" id="save" >OUI, je sauvegarde</a>
+              <button class="button is-success mt-2" id="save" >OUI, je sauvegarde</button>
               <a href="${value}" class="button is-danger mt-2">Non, merci</a>
+          </div>
+      </div>
+  </div>
+  <button class="modal-close is-large" aria-label="close" id="cancel"></button>
+</div>`
+)
+
+// Modal creation
+const endModalElement = (idGame) => htmlToElement(`
+<div class="modal is-active" id="showmodal">
+  <div class="modal-background"></div>
+  <div class="modal-content">
+      <div class="section modal-wrap" >
+          <div class="column has-text-centered">
+              <p>Votre partie est terminé</p>
+              <a href="/score/${idGame}" class="button is-succes mt-2">Voir les scores</a>
           </div>
       </div>
   </div>
@@ -242,13 +263,14 @@ const setStealablePickomino = (data) => {
 const setSaveButton = (value, data, id) => {
   const saveButton = document.getElementById(id)
   if (value) {
-    saveButton.onclick = () => {
-      axios({
+    saveButton.onclick = async () => {
+      await axios({
         method: 'post',
         url: '/save',
         data: JSON.stringify(data)
       })
-      setSaveButton(false, data)
+      setSaveButton(false, data, id)
+      window.location.href = '/save'
     }
     saveButton.removeAttribute('disabled')
   } else {
@@ -268,7 +290,7 @@ const modalSaveGame = (valeur, data, id) => {
   for (let i = 0, len = anchorTemplate.length; i < len; i++) {
     // open modal
     anchorTemplate[i].onclick = (event) => {
-      savemodal.appendChild(modalElement(anchorTemplate[i].href))
+      savemodal.appendChild(saveModalElement(anchorTemplate[i].href))
       const modal = document.getElementById('showmodal')
       modal.style.display = 'block'
       event.preventDefault()
@@ -282,4 +304,9 @@ const modalSaveGame = (valeur, data, id) => {
       }
     }
   }
+}
+
+const showGameEndModal = (data) => {
+  const gameEndModal = endModalElement(data.idGame)
+  document.body.appendChild(gameEndModal)
 }
